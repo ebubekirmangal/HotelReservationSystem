@@ -3,10 +3,11 @@ package com.tobeto.hotelReservationSystem.services.concretes;
 import com.tobeto.hotelReservationSystem.entities.User;
 import com.tobeto.hotelReservationSystem.repositories.UserRepository;
 import com.tobeto.hotelReservationSystem.services.abstracts.UserService;
-import com.tobeto.hotelReservationSystem.services.dtos.requests.AddUserRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.AddUserResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.requests.user.AddUserRequest;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.user.AddUserResponse;
 import com.tobeto.hotelReservationSystem.services.mappers.UserMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +26,10 @@ public class UserServiceImpl implements UserService {
         User saved = userRepository.save(user);
 
         return UserMapper.INSTANCE.addUserResponseToUser(saved);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

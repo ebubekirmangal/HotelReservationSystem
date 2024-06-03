@@ -1,4 +1,4 @@
-package com.tobeto.hotelReservationSystem.services.dtos.requests;
+package com.tobeto.hotelReservationSystem.services.dtos.requests.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

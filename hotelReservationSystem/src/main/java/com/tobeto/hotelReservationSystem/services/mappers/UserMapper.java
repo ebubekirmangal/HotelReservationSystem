@@ -1,8 +1,8 @@
 package com.tobeto.hotelReservationSystem.services.mappers;
 
 import com.tobeto.hotelReservationSystem.entities.User;
-import com.tobeto.hotelReservationSystem.services.dtos.requests.AddUserRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.AddUserResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.requests.user.AddUserRequest;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.user.AddUserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

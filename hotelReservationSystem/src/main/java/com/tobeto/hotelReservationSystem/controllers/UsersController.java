@@ -1,8 +1,8 @@
 package com.tobeto.hotelReservationSystem.controllers;
 
 import com.tobeto.hotelReservationSystem.services.abstracts.UserService;
-import com.tobeto.hotelReservationSystem.services.dtos.requests.AddUserRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.AddUserResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.requests.user.AddUserRequest;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.user.AddUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
