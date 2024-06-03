@@ -1,4 +1,4 @@
-package com.tobeto.hotelReservationSystem.entities;
+package com.tobeto.hotelReservationSystem.entities.enums;
 
 public enum Role {
     ADMIN,

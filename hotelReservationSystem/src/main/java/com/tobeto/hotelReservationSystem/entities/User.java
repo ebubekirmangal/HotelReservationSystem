@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.entities;
 
+import com.tobeto.hotelReservationSystem.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     private String lastName;
 
     private int age;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
