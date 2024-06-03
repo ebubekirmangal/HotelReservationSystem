@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.entities;
 
+import com.tobeto.hotelReservationSystem.entities.enums.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,9 @@ public class Reservation {
 
     private LocalDate checkOutDate;
 
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus reservationStatus;
+
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
@@ -31,4 +35,8 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

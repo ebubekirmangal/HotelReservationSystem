@@ -31,7 +31,7 @@ public class Room {
     private Boolean available;
 
     @Enumerated(EnumType.STRING)
-    private RoomType type;
+    private RoomType roomType;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")

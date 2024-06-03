@@ -24,6 +24,14 @@ public class SecurityConfiguration {
     private final JwtFilter jwtFilter;
     private final UserService userService;
 
+    private static final String[] WHITE_LIST_URLS = {
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/api/v1/auth/**"
+    };
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -47,10 +55,10 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**","http://localhost:8080/swagger-ui/index.html#/")
+                .requestMatchers(WHITE_LIST_URLS)
                 .permitAll()
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

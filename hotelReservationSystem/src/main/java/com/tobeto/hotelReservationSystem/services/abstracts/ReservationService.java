@@ -1,11 +1,9 @@
 package com.tobeto.hotelReservationSystem.services.abstracts;
 
+import com.tobeto.hotelReservationSystem.entities.enums.ReservationStatus;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reservation.AddReservationRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reservation.UpdateReservationRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.AddReservationResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.GetByIdReservationResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.ListReservationResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.UpdateReservationResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.*;
 
 import java.util.List;
 
@@ -20,4 +18,7 @@ public interface ReservationService {
     List<ListReservationResponse> getAll();
 
     GetByIdReservationResponse getById(int id);
+
+    void reservationStatus(int id, ReservationStatus status);
+    List<GetByIdReservationResponse> getReservationsByUserId(int userId);
 }

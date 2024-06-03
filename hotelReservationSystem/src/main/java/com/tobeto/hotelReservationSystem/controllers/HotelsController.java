@@ -20,24 +20,24 @@ public class HotelsController {
 
     private final HotelService hotelService;
 
-    @PostMapping("/add")
+    @PostMapping("/manager/add")
     @ResponseStatus(HttpStatus.CREATED)
     public AddHotelResponse add(@RequestBody AddHotelRequest request){
         return hotelService.add(request);
     }
-    @PutMapping("/update")
+    @PutMapping("/manager/update")
     public UpdateHotelResponse update(@RequestBody UpdateHotelRequest request){
         return hotelService.update(request);
     }
-    @DeleteMapping ("/delete/{id}")
+    @DeleteMapping ("/manager/delete/{id}")
     public void delete(@PathVariable("id") int id){
         hotelService.delete(id);
     }
-    @GetMapping ("/getAll")
+    @GetMapping ("/manager/getAll")
     public List<ListHotelResponse> getAll(){
         return hotelService.getAll();
     }
-    @GetMapping ("/getById/{id}")
+    @GetMapping ("/manager/getById/{id}")
     public GetByIdHotelResponse getById(@PathVariable("id") int id){
         return hotelService.getById(id);
     }

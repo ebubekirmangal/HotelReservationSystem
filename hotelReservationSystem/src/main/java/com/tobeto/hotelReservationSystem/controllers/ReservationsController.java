@@ -42,8 +42,14 @@ public class ReservationsController {
     }
 
     @GetMapping("/getById/{id}")
-    public GetByIdReservationResponse getById(@PathVariable int id)
+    public GetByIdReservationResponse getById(@PathVariable("id") int id)
     {
         return reservationService.getById(id);
     }
+
+    @PostMapping("/getByIdForGuest/{id}")
+    public List<GetByIdReservationResponse> getReservationsByUserId(@PathVariable("id") int id){
+        return reservationService.getReservationsByUserId(id);
+    }
+
 }
