@@ -21,5 +21,4 @@ public class UsersController {
 
         return userService.add(request);
     }
-
 }

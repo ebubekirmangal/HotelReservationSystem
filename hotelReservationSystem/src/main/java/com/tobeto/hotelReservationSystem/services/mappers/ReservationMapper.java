@@ -22,6 +22,9 @@ public interface ReservationMapper {
     @Mapping(target = "user.id",source = "userId")
     @Mapping(target = "room.id",source = "roomId")
     Reservation reservationToAddReservationRequest(AddReservationRequest addReservationRequest);
+    //Cannot invoke \"com.tobeto.hotelReservationSystem.services.mappers.ReservationMapper.reservationToAddReservationRequest
+    // (com.tobeto.hotelReservationSystem.services.dtos.requests.reservation.AddReservationRequest)\" because \"this.reservationMapper\"
+    // is null",
     @Mapping(target = "hotelId",source = "hotel.id")
     @Mapping(target = "userId",source = "user.id")
     @Mapping(target = "roomId",source = "room.id")
@@ -38,7 +41,7 @@ public interface ReservationMapper {
     @Mapping(target = "roomType", source = "room.roomType")
     @Mapping(target = "userId", source= "user.id")
     @Mapping(target = "hotelId", source = "hotel.id")
-    List<ListReservationResponse> getAllReservationResponseToReservation(List<Reservation> reservations);
+    ListReservationResponse getAllReservationResponseToReservation(Reservation reservation);
     @Mapping(target = "roomId", source = "room.id")
     @Mapping(target = "roomType", source = "room.roomType")
     @Mapping(target = "userId", source= "user.id")

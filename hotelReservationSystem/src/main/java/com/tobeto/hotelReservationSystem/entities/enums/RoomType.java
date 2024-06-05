@@ -7,4 +7,5 @@ public enum RoomType {
     DELUXE,
     FAMILY,
     KING;
+    //TODO: Frontend kısmında misafir- oda kapasitesine bakılacak
 }

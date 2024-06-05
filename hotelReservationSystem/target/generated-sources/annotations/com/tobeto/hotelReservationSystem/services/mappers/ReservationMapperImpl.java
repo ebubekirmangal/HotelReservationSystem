@@ -17,7 +17,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T00:00:04+0300",
+    date = "2024-06-04T21:51:10+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class ReservationMapperImpl implements ReservationMapper {
@@ -93,17 +93,25 @@ public class ReservationMapperImpl implements ReservationMapper {
     }
 
     @Override
-    public List<ListReservationResponse> getAllReservationResponseToReservation(List<Reservation> reservations) {
-        if ( reservations == null ) {
+    public ListReservationResponse getAllReservationResponseToReservation(Reservation reservation) {
+        if ( reservation == null ) {
             return null;
         }
 
-        List<ListReservationResponse> list = new ArrayList<ListReservationResponse>( reservations.size() );
-        for ( Reservation reservation : reservations ) {
-            list.add( reservationToListReservationResponse( reservation ) );
-        }
+        ListReservationResponse listReservationResponse = new ListReservationResponse();
 
-        return list;
+        listReservationResponse.setRoomId( reservationRoomId( reservation ) );
+        RoomType roomType = reservationRoomRoomType( reservation );
+        if ( roomType != null ) {
+            listReservationResponse.setRoomType( roomType.name() );
+        }
+        listReservationResponse.setUserId( reservationUserId( reservation ) );
+        listReservationResponse.setHotelId( reservationHotelId( reservation ) );
+        listReservationResponse.setId( reservation.getId() );
+        listReservationResponse.setCheckInDate( reservation.getCheckInDate() );
+        listReservationResponse.setCheckOutDate( reservation.getCheckOutDate() );
+
+        return listReservationResponse;
     }
 
     @Override
@@ -236,20 +244,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         room.setId( updateReservationRequest.getRoomId() );
 
         return room;
-    }
-
-    protected ListReservationResponse reservationToListReservationResponse(Reservation reservation) {
-        if ( reservation == null ) {
-            return null;
-        }
-
-        ListReservationResponse listReservationResponse = new ListReservationResponse();
-
-        listReservationResponse.setId( reservation.getId() );
-        listReservationResponse.setCheckInDate( reservation.getCheckInDate() );
-        listReservationResponse.setCheckOutDate( reservation.getCheckOutDate() );
-
-        return listReservationResponse;
     }
 
     private RoomType reservationRoomRoomType(Reservation reservation) {

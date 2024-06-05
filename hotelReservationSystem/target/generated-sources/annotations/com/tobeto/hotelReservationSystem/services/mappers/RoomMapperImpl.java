@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T00:37:37+0300",
+    date = "2024-06-04T21:51:09+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class RoomMapperImpl implements RoomMapper {
@@ -28,8 +28,10 @@ public class RoomMapperImpl implements RoomMapper {
         Room room = new Room();
 
         room.setHotel( addRoomRequestToHotel( request ) );
+        room.setRoomNumber( request.getRoomNumber() );
         room.setCapacity( request.getCapacity() );
         room.setPrice( request.getPrice() );
+        room.setAvailable( request.isAvailable() );
         room.setRoomType( request.getRoomType() );
 
         return room;
@@ -45,8 +47,10 @@ public class RoomMapperImpl implements RoomMapper {
 
         room.setHotel( updateRoomRequestToHotel( request ) );
         room.setId( request.getId() );
+        room.setRoomNumber( request.getRoomNumber() );
         room.setCapacity( request.getCapacity() );
         room.setPrice( request.getPrice() );
+        room.setAvailable( request.isAvailable() );
         room.setRoomType( request.getRoomType() );
 
         return room;
@@ -66,6 +70,9 @@ public class RoomMapperImpl implements RoomMapper {
         addRoomResponse.setRoomNumber( room.getRoomNumber() );
         addRoomResponse.setCapacity( room.getCapacity() );
         addRoomResponse.setPrice( room.getPrice() );
+        if ( room.getAvailable() != null ) {
+            addRoomResponse.setAvailable( room.getAvailable() );
+        }
 
         return addRoomResponse;
     }
@@ -84,6 +91,9 @@ public class RoomMapperImpl implements RoomMapper {
         updateRoomResponse.setRoomNumber( room.getRoomNumber() );
         updateRoomResponse.setCapacity( room.getCapacity() );
         updateRoomResponse.setPrice( room.getPrice() );
+        if ( room.getAvailable() != null ) {
+            updateRoomResponse.setAvailable( room.getAvailable() );
+        }
 
         return updateRoomResponse;
     }
@@ -102,6 +112,9 @@ public class RoomMapperImpl implements RoomMapper {
         getByIdRoomResponse.setRoomNumber( room.getRoomNumber() );
         getByIdRoomResponse.setCapacity( room.getCapacity() );
         getByIdRoomResponse.setPrice( room.getPrice() );
+        if ( room.getAvailable() != null ) {
+            getByIdRoomResponse.setAvailable( room.getAvailable() );
+        }
 
         return getByIdRoomResponse;
     }
@@ -164,6 +177,9 @@ public class RoomMapperImpl implements RoomMapper {
         listRoomResponse.setRoomNumber( room.getRoomNumber() );
         listRoomResponse.setCapacity( room.getCapacity() );
         listRoomResponse.setPrice( room.getPrice() );
+        if ( room.getAvailable() != null ) {
+            listRoomResponse.setAvailable( room.getAvailable() );
+        }
 
         return listRoomResponse;
     }

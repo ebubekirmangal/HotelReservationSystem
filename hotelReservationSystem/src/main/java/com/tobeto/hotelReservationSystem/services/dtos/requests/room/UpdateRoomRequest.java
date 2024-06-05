@@ -15,12 +15,12 @@ public class UpdateRoomRequest {
     private int id;
 
     private RoomType roomType;
-
+    private String roomNumber;
     private int capacity;
 
     private double price;
 
-    private boolean availability;
+    private boolean available;
 
     private int hotelId;
 }

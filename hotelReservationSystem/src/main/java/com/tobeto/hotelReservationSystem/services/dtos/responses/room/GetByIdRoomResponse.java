@@ -22,7 +22,7 @@ public class GetByIdRoomResponse {
 
     private double price;
 
-    private  boolean availability;
+    private  boolean available;
 
     private String hotelName;
 }

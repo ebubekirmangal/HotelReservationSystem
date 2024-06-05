@@ -22,7 +22,7 @@ public class AddRoomResponse {
 
     private double price;
 
-    private  boolean availability;
+    private  boolean available;
 
     private String hotelName;
 }

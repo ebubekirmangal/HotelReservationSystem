@@ -12,13 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddRoomRequest {
 
+    private String roomNumber;
+
     private RoomType roomType;
 
     private int capacity;
 
     private double price;
 
-    private boolean availability;
+    private boolean available;
 
     private int hotelId;
 }

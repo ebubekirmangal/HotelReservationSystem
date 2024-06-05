@@ -12,7 +12,7 @@ import lombok.Setter;
 public class UpdateHotelRequest {
 
     private int id;
-
+    private int userId;
     private String name;
 
     private String address;

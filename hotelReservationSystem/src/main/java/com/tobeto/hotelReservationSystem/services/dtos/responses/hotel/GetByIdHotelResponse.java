@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GetByIdHotelResponse {
     private int id;
+    private int userId;
 
     private String name;
 

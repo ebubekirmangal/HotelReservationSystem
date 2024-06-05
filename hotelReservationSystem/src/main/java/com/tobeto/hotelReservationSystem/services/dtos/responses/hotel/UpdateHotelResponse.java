@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UpdateHotelResponse {
     private int id;
-
+    private int userId;
     private String name;
 
     private String address;

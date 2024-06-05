@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.dtos.responses.reservation;
 
+import com.tobeto.hotelReservationSystem.entities.enums.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -11,7 +11,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T00:00:04+0300",
+    date = "2024-06-04T21:51:10+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class HotelMapperImpl implements HotelMapper {
@@ -24,6 +24,23 @@ public class HotelMapperImpl implements HotelMapper {
 
         Hotel hotel = new Hotel();
 
+        hotel.setName( request.getName() );
+        hotel.setAddress( request.getAddress() );
+        hotel.setPhoneNumber( String.valueOf( request.getPhoneNumber() ) );
+        hotel.setEmail( request.getEmail() );
+
+        return hotel;
+    }
+
+    @Override
+    public Hotel hotelToUpdateHotelRequest(UpdateHotelRequest request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        Hotel hotel = new Hotel();
+
+        hotel.setId( request.getId() );
         hotel.setName( request.getName() );
         hotel.setAddress( request.getAddress() );
         hotel.setPhoneNumber( String.valueOf( request.getPhoneNumber() ) );
@@ -49,23 +66,6 @@ public class HotelMapperImpl implements HotelMapper {
         addHotelResponse.setEmail( hotel.getEmail() );
 
         return addHotelResponse;
-    }
-
-    @Override
-    public Hotel hotelToUpdateHotelRequest(UpdateHotelRequest request) {
-        if ( request == null ) {
-            return null;
-        }
-
-        Hotel hotel = new Hotel();
-
-        hotel.setId( request.getId() );
-        hotel.setName( request.getName() );
-        hotel.setAddress( request.getAddress() );
-        hotel.setPhoneNumber( String.valueOf( request.getPhoneNumber() ) );
-        hotel.setEmail( request.getEmail() );
-
-        return hotel;
     }
 
     @Override

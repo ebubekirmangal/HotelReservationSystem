@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddHotelRequest {
+    private int userId;
 
     private String name;
 
