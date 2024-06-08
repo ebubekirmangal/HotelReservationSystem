@@ -17,7 +17,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T21:51:10+0300",
+    date = "2024-06-08T13:45:56+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class ReservationMapperImpl implements ReservationMapper {
@@ -53,6 +53,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         addReservationResponse.setId( reservation.getId() );
         addReservationResponse.setCheckInDate( reservation.getCheckInDate() );
         addReservationResponse.setCheckOutDate( reservation.getCheckOutDate() );
+        addReservationResponse.setReservationStatus( reservation.getReservationStatus() );
 
         return addReservationResponse;
     }

@@ -32,7 +32,9 @@ public class ReservationServiceImpl implements ReservationService {
             Reservation reservation=ReservationMapper.INSTANCE.reservationToAddReservationRequest(addReservationRequest);
             reservation.setReservationStatus(ReservationStatus.PENDING);
             Reservation savedReservation=reservationRepository.save(reservation);
-            return ReservationMapper.INSTANCE.addReservationResponseToReservation(savedReservation);
+            AddReservationResponse response= ReservationMapper.INSTANCE.addReservationResponseToReservation(savedReservation);
+            reservationStatus(response.getId(),response.getReservationStatus() );
+            return response;
             //TODO: Ücret hesaplanacak
         }
 
@@ -66,13 +68,15 @@ public class ReservationServiceImpl implements ReservationService {
         int roomId = reservation.getRoom().getId();
         Room room = roomService.findRoomById(roomId);
         if(reservationStatus.equals(ReservationStatus.CANCELED)){
-            room.setAvailable(false);
-        }else if(reservationStatus.equals(ReservationStatus.CONFIRMED)){
             room.setAvailable(true);
+        }else if(reservationStatus.equals(ReservationStatus.CONFIRMED)){
+            room.setAvailable(false);
         }else if(reservationStatus.equals(ReservationStatus.PENDING)){
             room.setAvailable(false);
         }
-        reservation.setRoom(room);
+        roomService.updateAvaible(room,room.getAvailable());
+
+        System.out.println("Oda ID: " + room.getId() + ", Müsaitlik Durumu: " + room.getAvailable());
         reservationRepository.save(reservation);
     }
 
@@ -82,10 +86,12 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         @Override
-        public UpdateReservationResponse update(UpdateReservationRequest updateReservationRequest) {
-            Reservation reservation=ReservationMapper.INSTANCE.reservationToUpdateReservationRequest(updateReservationRequest);
+        public UpdateReservationResponse update(UpdateReservationRequest request) {
+            Reservation reservation=ReservationMapper.INSTANCE.reservationToUpdateReservationRequest(request);
             Reservation updatedReservation=reservationRepository.save(reservation);
-            return ReservationMapper.INSTANCE.updateReservationResponseToReservation(updatedReservation);
+            UpdateReservationResponse response = ReservationMapper.INSTANCE.updateReservationResponseToReservation(updatedReservation);
+            reservationStatus(request.getId(),request.getReservationStatus() );
+            return response;
         }
 
         @Override

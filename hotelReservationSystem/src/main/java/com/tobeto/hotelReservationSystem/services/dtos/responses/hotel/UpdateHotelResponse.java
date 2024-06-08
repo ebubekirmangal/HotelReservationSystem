@@ -16,7 +16,7 @@ public class UpdateHotelResponse {
 
     private String address;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String email;
 }

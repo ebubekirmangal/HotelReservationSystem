@@ -34,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPasswordConfirm(passwordEncoder.encode(request.getPasswordConfirm()));
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(request.getRole());
         if(!request.getPassword().equals(request.getPasswordConfirm())) {
             throw new BusinessException("Şifreler eşleşmedi.");
         }

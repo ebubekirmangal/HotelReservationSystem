@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.dtos.requests.room;
 
+import com.tobeto.hotelReservationSystem.entities.enums.ReservationStatus;
 import com.tobeto.hotelReservationSystem.entities.enums.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,6 @@ public class UpdateRoomRequest {
     private boolean available;
 
     private int hotelId;
+
+    private ReservationStatus reservationStatus;
 }

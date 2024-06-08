@@ -20,7 +20,5 @@ public class AddRoomRequest {
 
     private double price;
 
-    private boolean available;
-
     private int hotelId;
 }

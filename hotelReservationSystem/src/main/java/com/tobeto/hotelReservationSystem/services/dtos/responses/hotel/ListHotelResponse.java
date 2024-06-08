@@ -17,7 +17,7 @@ public class ListHotelResponse {
 
     private String address;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String email;
 }

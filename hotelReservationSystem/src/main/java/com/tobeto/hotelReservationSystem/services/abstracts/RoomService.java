@@ -25,4 +25,5 @@ public interface RoomService {
     GetByIdRoomResponse getById(int id);
     List<ListRoomResponse> findAvailableRooms(LocalDate startDate, LocalDate endDate, RoomType roomType);
     Room findRoomById(int id);
+    void updateAvaible(Room room,boolean avaible);
 }

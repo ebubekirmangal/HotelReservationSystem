@@ -28,9 +28,17 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public AddRoomResponse add(AddRoomRequest request) {
         Room room = RoomMapper.INSTANCE.addRoomRequestToRoom(request);
+        room.setAvailable(true);
+
         Room saved = roomRepository.save(room);
         AddRoomResponse response = RoomMapper.INSTANCE.roomToAddRoomResponse(saved);
         return response;
+    }
+    @Override
+    public void updateAvaible(Room room,boolean avaible){
+        room.setAvailable(avaible);
+        System.out.println("Updating room ID: " + room.getId() + " to availability: " + room.getAvailable());
+        roomRepository.save(room);
     }
 
     @Override

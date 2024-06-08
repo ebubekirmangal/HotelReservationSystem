@@ -16,7 +16,8 @@ public class AddHotelRequest {
 
     private String address;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String email;
+
 }

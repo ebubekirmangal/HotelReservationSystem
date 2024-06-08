@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T21:51:09+0300",
+    date = "2024-06-08T13:45:56+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class RoomMapperImpl implements RoomMapper {
@@ -31,7 +31,6 @@ public class RoomMapperImpl implements RoomMapper {
         room.setRoomNumber( request.getRoomNumber() );
         room.setCapacity( request.getCapacity() );
         room.setPrice( request.getPrice() );
-        room.setAvailable( request.isAvailable() );
         room.setRoomType( request.getRoomType() );
 
         return room;

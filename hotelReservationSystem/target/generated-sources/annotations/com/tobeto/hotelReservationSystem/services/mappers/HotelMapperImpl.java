@@ -11,7 +11,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-04T21:51:10+0300",
+    date = "2024-06-08T13:45:56+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class HotelMapperImpl implements HotelMapper {
@@ -26,7 +26,7 @@ public class HotelMapperImpl implements HotelMapper {
 
         hotel.setName( request.getName() );
         hotel.setAddress( request.getAddress() );
-        hotel.setPhoneNumber( String.valueOf( request.getPhoneNumber() ) );
+        hotel.setPhoneNumber( request.getPhoneNumber() );
         hotel.setEmail( request.getEmail() );
 
         return hotel;
@@ -43,7 +43,7 @@ public class HotelMapperImpl implements HotelMapper {
         hotel.setId( request.getId() );
         hotel.setName( request.getName() );
         hotel.setAddress( request.getAddress() );
-        hotel.setPhoneNumber( String.valueOf( request.getPhoneNumber() ) );
+        hotel.setPhoneNumber( request.getPhoneNumber() );
         hotel.setEmail( request.getEmail() );
 
         return hotel;
@@ -60,9 +60,7 @@ public class HotelMapperImpl implements HotelMapper {
         addHotelResponse.setId( hotel.getId() );
         addHotelResponse.setName( hotel.getName() );
         addHotelResponse.setAddress( hotel.getAddress() );
-        if ( hotel.getPhoneNumber() != null ) {
-            addHotelResponse.setPhoneNumber( Integer.parseInt( hotel.getPhoneNumber() ) );
-        }
+        addHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         addHotelResponse.setEmail( hotel.getEmail() );
 
         return addHotelResponse;
@@ -79,9 +77,7 @@ public class HotelMapperImpl implements HotelMapper {
         updateHotelResponse.setId( hotel.getId() );
         updateHotelResponse.setName( hotel.getName() );
         updateHotelResponse.setAddress( hotel.getAddress() );
-        if ( hotel.getPhoneNumber() != null ) {
-            updateHotelResponse.setPhoneNumber( Integer.parseInt( hotel.getPhoneNumber() ) );
-        }
+        updateHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         updateHotelResponse.setEmail( hotel.getEmail() );
 
         return updateHotelResponse;
@@ -98,9 +94,7 @@ public class HotelMapperImpl implements HotelMapper {
         listHotelResponse.setId( hotel.getId() );
         listHotelResponse.setName( hotel.getName() );
         listHotelResponse.setAddress( hotel.getAddress() );
-        if ( hotel.getPhoneNumber() != null ) {
-            listHotelResponse.setPhoneNumber( Integer.parseInt( hotel.getPhoneNumber() ) );
-        }
+        listHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         listHotelResponse.setEmail( hotel.getEmail() );
 
         return listHotelResponse;
@@ -117,9 +111,7 @@ public class HotelMapperImpl implements HotelMapper {
         getByIdHotelResponse.setId( hotel.getId() );
         getByIdHotelResponse.setName( hotel.getName() );
         getByIdHotelResponse.setAddress( hotel.getAddress() );
-        if ( hotel.getPhoneNumber() != null ) {
-            getByIdHotelResponse.setPhoneNumber( Integer.parseInt( hotel.getPhoneNumber() ) );
-        }
+        getByIdHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         getByIdHotelResponse.setEmail( hotel.getEmail() );
 
         return getByIdHotelResponse;
