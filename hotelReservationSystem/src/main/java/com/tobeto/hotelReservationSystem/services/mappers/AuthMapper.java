@@ -10,7 +10,6 @@ import org.mapstruct.factory.Mappers;
 public interface AuthMapper {
 
     AuthMapper INSTANCE = Mappers.getMapper(AuthMapper.class);
-    //TODO:role veritabanına girilmiyor.
     User userToRegisterAuthRequest(RegisterAuthRequest request);
 
 }

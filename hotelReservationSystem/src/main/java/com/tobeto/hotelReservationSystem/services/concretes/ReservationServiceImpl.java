@@ -9,13 +9,16 @@ import com.tobeto.hotelReservationSystem.services.abstracts.ReservationService;
 import com.tobeto.hotelReservationSystem.services.abstracts.RoomService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reservation.AddReservationRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reservation.UpdateReservationRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.*;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.ListRoomResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.AddReservationResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.GetByIdReservationResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.ListReservationResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reservation.UpdateReservationResponse;
 import com.tobeto.hotelReservationSystem.services.mappers.ReservationMapper;
-import com.tobeto.hotelReservationSystem.services.mappers.RoomMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.time.temporal.ChronoUnit;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,14 +31,24 @@ public class ReservationServiceImpl implements ReservationService {
     private final RoomService roomService;
 
         @Override
-        public AddReservationResponse add(AddReservationRequest addReservationRequest) {
-            Reservation reservation=ReservationMapper.INSTANCE.reservationToAddReservationRequest(addReservationRequest);
+        public AddReservationResponse add(AddReservationRequest request) {
+            Reservation reservation=ReservationMapper.INSTANCE.reservationToAddReservationRequest(request);
             reservation.setReservationStatus(ReservationStatus.PENDING);
+
+            int roomId = request.getRoomId();
+            Room room = roomService.findRoomById(roomId);
+
+            LocalDate checkInDate = request.getCheckInDate();
+            LocalDate checkOutDate = request.getCheckOutDate();
+
+            double day = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+            reservation.setTotalPrice(room.getPrice()*day);
+
             Reservation savedReservation=reservationRepository.save(reservation);
             AddReservationResponse response= ReservationMapper.INSTANCE.addReservationResponseToReservation(savedReservation);
             reservationStatus(response.getId(),response.getReservationStatus() );
             return response;
-            //TODO: Ücret hesaplanacak
+
         }
 
         @Override

@@ -27,4 +27,6 @@ public class AddReservationResponse {
     private int hotelId;
 
     private ReservationStatus reservationStatus;
+
+    private double totalPrice;
 }
