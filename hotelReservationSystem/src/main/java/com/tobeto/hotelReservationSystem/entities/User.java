@@ -1,6 +1,5 @@
 package com.tobeto.hotelReservationSystem.entities;
 
-import com.tobeto.hotelReservationSystem.entities.enums.ReservationStatus;
 import com.tobeto.hotelReservationSystem.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -42,6 +41,12 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "user")
+    private List<Feedback> feedbacks;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reply> replies;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

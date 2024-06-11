@@ -76,7 +76,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("id is not found"));
 
-        //TODO: Reservasyon durumuna göre oda durumunu değiştirmiyor.
+
         reservation.setReservationStatus(reservationStatus);
         int roomId = reservation.getRoom().getId();
         Room room = roomService.findRoomById(roomId);
