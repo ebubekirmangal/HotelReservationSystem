@@ -3,10 +3,7 @@ package com.tobeto.hotelReservationSystem.controllers;
 import com.tobeto.hotelReservationSystem.services.abstracts.HotelService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.AddHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.UpdateHotelRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.AddHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.GetByIdHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.ListHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.UpdateHotelResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +37,9 @@ public class HotelsController {
     @GetMapping ("/manager/getById/{id}")
     public GetByIdHotelResponse getById(@PathVariable("id") int id){
         return hotelService.getById(id);
+    }
+    @GetMapping("/search")
+    public List<ListHotelRoomResponse> searchHotels(@RequestParam Double price, @RequestParam Integer rating){
+        return hotelService. findHotelsWithPriceAndRating(price,rating);
     }
 }

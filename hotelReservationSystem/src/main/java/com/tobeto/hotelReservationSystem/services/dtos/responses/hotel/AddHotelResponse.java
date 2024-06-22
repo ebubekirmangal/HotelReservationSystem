@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.dtos.responses.hotel;
 
+import com.tobeto.hotelReservationSystem.entities.enums.HousingType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +11,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddHotelResponse {
+
     private int id;
+
     private int userId;
 
     private String name;
 
-    private String address;
-
     private int phoneNumber;
 
     private String email;
+
+    private HousingType housingType;
+
+    private int addressId;
 }
