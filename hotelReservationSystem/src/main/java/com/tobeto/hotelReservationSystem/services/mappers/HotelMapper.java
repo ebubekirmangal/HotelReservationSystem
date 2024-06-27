@@ -23,16 +23,22 @@ public interface HotelMapper {
     HotelMapper INSTANCE = Mappers.getMapper(HotelMapper.class);
 
     //@Mapping(target = "reservations",source = "userId")
-    Hotel hotelToAddHotelRequest(AddHotelRequest request);
+    @Mapping(target = "address.id", source = "addressId")
+    Hotel  hotelToAddHotelRequest(AddHotelRequest request);
     //@Mapping(target = "reservations",source = "userId")
+    @Mapping(target = "address.id", source = "addressId")
     Hotel hotelToUpdateHotelRequest(UpdateHotelRequest request);
     //@Mapping(target="userId",source = "reservations")
+    @Mapping(target = "addressId", source = "address.id")
     AddHotelResponse addHotelResponseToHotel(Hotel hotel);
    // @Mapping(target="userId",source = "reservations")
+   @Mapping(target = "addressId", source = "address.id")
     UpdateHotelResponse updateHotelResponseToHotel(Hotel hotel);
    // @Mapping(target="userId",source = "reservations")
+   @Mapping(target = "addressId", source = "address.id")
     ListHotelResponse ListHotelResponseToHotel(Hotel hotel);
    // @Mapping(target="userId",source = "reservations")
+   @Mapping(target = "addressId", source = "address.id")
     GetByIdHotelResponse getByIdHotelResponseToHotel(Hotel hotel);
 /*
     default List<User> mapReservationsToHotels(List<Reservation> reservations) {

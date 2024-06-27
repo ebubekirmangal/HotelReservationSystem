@@ -2,13 +2,23 @@ package com.tobeto.hotelReservationSystem.entities;
 
 import com.tobeto.hotelReservationSystem.entities.enums.PaymentType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Table(name = "payments")
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
     private String paymentId;  // Ödeme sağlayıcısı tarafından verilen benzersiz kimlik

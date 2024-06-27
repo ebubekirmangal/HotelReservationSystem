@@ -6,14 +6,12 @@ import com.tobeto.hotelReservationSystem.repositories.HotelRepository;
 import com.tobeto.hotelReservationSystem.services.abstracts.HotelService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.AddHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.UpdateHotelRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.AddHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.GetByIdHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.ListHotelResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.UpdateHotelResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.*;
 import com.tobeto.hotelReservationSystem.services.mappers.HotelMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +21,7 @@ import java.util.Optional;
 public class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;
+
     @Override
     public List<ListHotelResponse> getAll() {
         List<Hotel> hotelList = hotelRepository.findAll();
@@ -38,6 +37,11 @@ public class HotelServiceImpl implements HotelService {
     public GetByIdHotelResponse getById(int id) {
         Optional<Hotel> hotel = hotelRepository.findById(id);
         return hotel.map(HotelMapper.INSTANCE::getByIdHotelResponseToHotel).orElse(null);
+    }
+
+    @Override
+    public List<HotelDetailsResponse> findHotelsByCityAndDates(String city, LocalDate checkInDate, LocalDate checkOutDate) {
+        return hotelRepository.findHotelsByCityAndDates(city, checkInDate, checkOutDate);
     }
 
     @Override
@@ -63,4 +67,8 @@ public class HotelServiceImpl implements HotelService {
         UpdateHotelResponse response = HotelMapper.INSTANCE.updateHotelResponseToHotel(Updated);
         return response;
     }
+//    @Override
+//    public List<ListHotelRoomResponse> findHotelsWithPriceAndRating(Double price, Integer rating) {
+//        return hotelRepository.findHotelsWithPriceAndRating(price, rating);
+//    }
 }

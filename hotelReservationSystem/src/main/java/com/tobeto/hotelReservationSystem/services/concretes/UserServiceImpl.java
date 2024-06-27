@@ -6,11 +6,13 @@ import com.tobeto.hotelReservationSystem.services.abstracts.UserService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.user.AddUserRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.user.AddUserResponse;
 import com.tobeto.hotelReservationSystem.services.mappers.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor //TODO:bunu girmeyi unutmuşuz
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;

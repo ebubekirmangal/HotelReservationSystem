@@ -20,5 +20,6 @@ public interface ReservationService {
     GetByIdReservationResponse getById(int id);
 
     void reservationStatus(int id, ReservationStatus status);
+
     List<GetByIdReservationResponse> getReservationsByUserId(int userId);
 }

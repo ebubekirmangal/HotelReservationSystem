@@ -18,3 +18,4 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
                                   @Param("endDate") LocalDate endDate,
                                   @Param("roomType")RoomType roomType);
 }
+
