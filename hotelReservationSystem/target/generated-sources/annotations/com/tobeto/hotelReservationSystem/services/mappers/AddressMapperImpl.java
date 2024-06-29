@@ -11,7 +11,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-26T15:50:14+0300",
+    date = "2024-06-29T20:46:11+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
 )
 public class AddressMapperImpl implements AddressMapper {
@@ -24,11 +24,7 @@ public class AddressMapperImpl implements AddressMapper {
 
         Address address = new Address();
 
-        address.setCountry( request.getCountry() );
-        address.setCity( request.getCity() );
-        address.setDistrict( request.getDistrict() );
-        address.setStreet( request.getStreet() );
-        address.setZipCode( request.getZipCode() );
+        address.setDescription( request.getDescription() );
 
         return address;
     }
@@ -42,11 +38,6 @@ public class AddressMapperImpl implements AddressMapper {
         AddAddressResponse addAddressResponse = new AddAddressResponse();
 
         addAddressResponse.setId( address.getId() );
-        addAddressResponse.setCountry( address.getCountry() );
-        addAddressResponse.setCity( address.getCity() );
-        addAddressResponse.setDistrict( address.getDistrict() );
-        addAddressResponse.setStreet( address.getStreet() );
-        addAddressResponse.setZipCode( address.getZipCode() );
 
         return addAddressResponse;
     }
@@ -60,11 +51,7 @@ public class AddressMapperImpl implements AddressMapper {
         Address address = new Address();
 
         address.setId( request.getId() );
-        address.setCountry( request.getCountry() );
-        address.setCity( request.getCity() );
-        address.setDistrict( request.getDistrict() );
-        address.setStreet( request.getStreet() );
-        address.setZipCode( request.getZipCode() );
+        address.setDescription( request.getDescription() );
 
         return address;
     }
@@ -78,11 +65,6 @@ public class AddressMapperImpl implements AddressMapper {
         UpdateAddressResponse updateAddressResponse = new UpdateAddressResponse();
 
         updateAddressResponse.setId( address.getId() );
-        updateAddressResponse.setCountry( address.getCountry() );
-        updateAddressResponse.setCity( address.getCity() );
-        updateAddressResponse.setDistrict( address.getDistrict() );
-        updateAddressResponse.setStreet( address.getStreet() );
-        updateAddressResponse.setZipCode( address.getZipCode() );
 
         return updateAddressResponse;
     }
@@ -96,11 +78,6 @@ public class AddressMapperImpl implements AddressMapper {
         ListAddressResponse listAddressResponse = new ListAddressResponse();
 
         listAddressResponse.setId( address.getId() );
-        listAddressResponse.setCountry( address.getCountry() );
-        listAddressResponse.setCity( address.getCity() );
-        listAddressResponse.setDistrict( address.getDistrict() );
-        listAddressResponse.setStreet( address.getStreet() );
-        listAddressResponse.setZipCode( address.getZipCode() );
 
         return listAddressResponse;
     }
@@ -114,11 +91,6 @@ public class AddressMapperImpl implements AddressMapper {
         GetByIdAddressResponse getByIdAddressResponse = new GetByIdAddressResponse();
 
         getByIdAddressResponse.setId( address.getId() );
-        getByIdAddressResponse.setCountry( address.getCountry() );
-        getByIdAddressResponse.setCity( address.getCity() );
-        getByIdAddressResponse.setDistrict( address.getDistrict() );
-        getByIdAddressResponse.setStreet( address.getStreet() );
-        getByIdAddressResponse.setZipCode( address.getZipCode() );
 
         return getByIdAddressResponse;
     }

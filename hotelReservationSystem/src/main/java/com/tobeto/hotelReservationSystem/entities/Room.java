@@ -30,6 +30,8 @@ public class Room {
 
     private Boolean available;
 
+    private List<String> images;
+
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
 

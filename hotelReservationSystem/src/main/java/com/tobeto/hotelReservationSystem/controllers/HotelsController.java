@@ -45,10 +45,10 @@ public class HotelsController {
 ////    public List<ListHotelRoomResponse> searchHotels(@RequestParam Double price, @RequestParam Integer rating){
 ////        return hotelService. findHotelsWithPriceAndRating(price,rating);
 ////    }
-@GetMapping("/search-hotels")
-public List<HotelDetailsResponse> searchHotels(@RequestParam String city, @RequestParam LocalDate checkInDate, @RequestParam LocalDate checkOutDate) {
-    return hotelService.findHotelsByCityAndDates(city, checkInDate, checkOutDate);
-}
+//@GetMapping("/search-hotels")
+//public List<HotelDetailsResponse> searchHotels(@RequestParam String city, @RequestParam LocalDate checkInDate, @RequestParam LocalDate checkOutDate) {
+//    return hotelService.findHotelsByCityAndDates(city, checkInDate, checkOutDate);
+//}
 
 
 }

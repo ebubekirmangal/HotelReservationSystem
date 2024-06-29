@@ -21,7 +21,9 @@ public class Payment {
 
     private int id;
 
-    private String paymentId;  // Ödeme sağlayıcısı tarafından verilen benzersiz kimlik
+    private String cardNo;// Ödeme sağlayıcısı tarafından verilen benzersiz kimlik (paymentId)
+
+    private String cvv;
 
     private double amount;
 

@@ -19,7 +19,7 @@ public interface HotelService {
 
     GetByIdHotelResponse getById(int id);
 
-    List<HotelDetailsResponse> findHotelsByCityAndDates(String city, LocalDate checkInDate, LocalDate checkOutDate);
+//    List<HotelDetailsResponse> findHotelsByCityAndDates(String city, LocalDate checkInDate, LocalDate checkOutDate);
 
 //    List<ListHotelRoomResponse> findHotelsWithPriceAndRating(Double price, Integer rating);
 }

@@ -12,7 +12,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-26T15:50:14+0300",
+    date = "2024-06-29T20:46:11+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
 )
 public class PaymentMapperImpl implements PaymentMapper {
@@ -26,7 +26,6 @@ public class PaymentMapperImpl implements PaymentMapper {
         Payment payment = new Payment();
 
         payment.setUser( addPaymentRequestToUser( request ) );
-        payment.setPaymentId( request.getPaymentId() );
         payment.setAmount( request.getAmount() );
         payment.setCurrency( request.getCurrency() );
         payment.setDescription( request.getDescription() );
@@ -47,7 +46,6 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         payment.setUser( updatePaymentRequestToUser( request ) );
         payment.setId( request.getId() );
-        payment.setPaymentId( request.getPaymentId() );
         payment.setAmount( request.getAmount() );
         payment.setCurrency( request.getCurrency() );
         payment.setDescription( request.getDescription() );
@@ -68,7 +66,6 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         addPaymentResponse.setUserId( paymentUserId( payment ) );
         addPaymentResponse.setId( payment.getId() );
-        addPaymentResponse.setPaymentId( payment.getPaymentId() );
         addPaymentResponse.setAmount( payment.getAmount() );
         addPaymentResponse.setPaymentType( payment.getPaymentType() );
         addPaymentResponse.setCurrency( payment.getCurrency() );
@@ -89,7 +86,6 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         updatePaymentResponse.setUserId( paymentUserId( payment ) );
         updatePaymentResponse.setId( payment.getId() );
-        updatePaymentResponse.setPaymentId( payment.getPaymentId() );
         updatePaymentResponse.setAmount( payment.getAmount() );
         updatePaymentResponse.setPaymentType( payment.getPaymentType() );
         updatePaymentResponse.setCurrency( payment.getCurrency() );
@@ -110,7 +106,6 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         getByIdPaymentResponse.setUserId( paymentUserId( payment ) );
         getByIdPaymentResponse.setId( payment.getId() );
-        getByIdPaymentResponse.setPaymentId( payment.getPaymentId() );
         getByIdPaymentResponse.setAmount( payment.getAmount() );
         getByIdPaymentResponse.setPaymentType( payment.getPaymentType() );
         getByIdPaymentResponse.setCurrency( payment.getCurrency() );
@@ -131,7 +126,6 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         listPaymentResponse.setUserId( paymentUserId( payments ) );
         listPaymentResponse.setId( payments.getId() );
-        listPaymentResponse.setPaymentId( payments.getPaymentId() );
         listPaymentResponse.setAmount( payments.getAmount() );
         listPaymentResponse.setPaymentType( payments.getPaymentType() );
         listPaymentResponse.setCurrency( payments.getCurrency() );

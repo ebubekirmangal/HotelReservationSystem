@@ -13,15 +13,4 @@ public class UpdateAddressResponse {
 
     private int id;
 
-    private String country;
-
-    private String city;
-
-    private String district;
-
-    private String street;
-
-    private String zipCode;
-
-
 }

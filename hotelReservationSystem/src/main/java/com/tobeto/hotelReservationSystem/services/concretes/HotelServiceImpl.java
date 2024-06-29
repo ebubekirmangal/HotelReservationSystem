@@ -39,10 +39,10 @@ public class HotelServiceImpl implements HotelService {
         return hotel.map(HotelMapper.INSTANCE::getByIdHotelResponseToHotel).orElse(null);
     }
 
-    @Override
-    public List<HotelDetailsResponse> findHotelsByCityAndDates(String city, LocalDate checkInDate, LocalDate checkOutDate) {
-        return hotelRepository.findHotelsByCityAndDates(city, checkInDate, checkOutDate);
-    }
+//    @Override
+//    public List<HotelDetailsResponse> findHotelsByCityAndDates(String city, LocalDate checkInDate, LocalDate checkOutDate) {
+//        return hotelRepository.findHotelsByCityAndDates(city, checkInDate, checkOutDate);
+//    }
 
     @Override
     public AddHotelResponse add(AddHotelRequest request) {

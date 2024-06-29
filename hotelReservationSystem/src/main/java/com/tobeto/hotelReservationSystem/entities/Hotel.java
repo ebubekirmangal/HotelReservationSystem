@@ -30,6 +30,8 @@ public class Hotel {
 
     private int rating;
 
+    private List<String> images;
+
     @Enumerated(EnumType.STRING)
     private HousingType housingType;
 
