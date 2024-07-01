@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/api/v1/address")
 public class AddressesController {
     private final AddressService addressService;
-
     @PostMapping ("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public AddAddressResponse add(@RequestBody AddAddressRequest request){

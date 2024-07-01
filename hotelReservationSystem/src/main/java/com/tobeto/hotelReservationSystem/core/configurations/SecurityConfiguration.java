@@ -26,10 +26,9 @@ public class SecurityConfiguration {
 
     private static final String[] WHITE_LIST_URLS = {
             "/swagger-ui/**",
-            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/v3/api-docs",
             "/v3/api-docs/**",
-            "/swagger-resources/**",
-            "/webjars/**",
             "/api/v1/auth/**"
     };
     @Bean
@@ -55,17 +54,15 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers(WHITE_LIST_URLS)
+                .requestMatchers("/**")
                 .permitAll()
                 .anyRequest()
-                .permitAll()
+                .authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
-
     }
 }

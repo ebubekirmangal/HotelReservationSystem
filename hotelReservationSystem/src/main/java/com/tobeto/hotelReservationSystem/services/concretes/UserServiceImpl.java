@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor //TODO:bunu girmeyi unutmuşuz
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;

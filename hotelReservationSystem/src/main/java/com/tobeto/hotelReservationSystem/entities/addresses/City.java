@@ -24,9 +24,6 @@ public class City {
 
     private String name;
 
-    @OneToOne(mappedBy= "city")
-    private District district;
-
-    @OneToMany(mappedBy = "city")
-    private List<Address> addresses;
+    @OneToMany(mappedBy= "city")
+    private List<District> district;
 }

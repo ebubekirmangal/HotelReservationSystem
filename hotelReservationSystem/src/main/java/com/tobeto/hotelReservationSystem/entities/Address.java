@@ -1,6 +1,7 @@
 package com.tobeto.hotelReservationSystem.entities;
 
 import com.tobeto.hotelReservationSystem.entities.addresses.City;
+import com.tobeto.hotelReservationSystem.entities.addresses.District;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,8 @@ public class Address {
     private Hotel hotel;
 
     @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
+    @JoinColumn(name = "district_id")
+    private District district;
 
 
 }
