@@ -30,8 +30,6 @@ public class Hotel {
 
     private int rating;
 
-    private List<String> images;
-
     @Enumerated(EnumType.STRING)
     private HousingType housingType;
 
@@ -44,4 +42,10 @@ public class Hotel {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Feature> features;
 }

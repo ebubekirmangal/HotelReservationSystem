@@ -31,8 +31,10 @@ public class User implements UserDetails {
 
     private LocalDate birthDay;
 
+    @JoinTable(name="roles", joinColumns = @JoinColumn(name="user_id"))
+    @Column(name="role")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private List<Role> authorities;
 
     @Column(unique = true)
     private String email;
@@ -49,10 +51,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Reply> replies;
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
 
     @Override
     public String getPassword() {

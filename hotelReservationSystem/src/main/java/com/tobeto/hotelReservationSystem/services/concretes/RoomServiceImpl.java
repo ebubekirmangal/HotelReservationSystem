@@ -81,7 +81,6 @@ public class RoomServiceImpl implements RoomService {
             ListRoomResponse roomResponse = new ListRoomResponse();
             roomResponse.setId(room.getId());
             roomResponse.setRoomNumber(room.getRoomNumber());
-            roomResponse.setCapacity(room.getCapacity());
             roomResponse.setPrice(room.getPrice());
             roomResponse.setAvailable(room.getAvailable());
             // Diğer gerekli bilgileri ekleyin

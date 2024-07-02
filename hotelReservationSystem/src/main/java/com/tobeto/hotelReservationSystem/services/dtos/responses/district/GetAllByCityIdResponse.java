@@ -1,4 +1,4 @@
-package com.tobeto.hotelReservationSystem.services.dtos.responses.District;
+package com.tobeto.hotelReservationSystem.services.dtos.responses.district;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

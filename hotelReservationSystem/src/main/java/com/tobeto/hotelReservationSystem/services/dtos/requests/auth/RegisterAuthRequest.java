@@ -2,13 +2,14 @@ package com.tobeto.hotelReservationSystem.services.dtos.requests.auth;
 
 import com.tobeto.hotelReservationSystem.entities.enums.Role;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 
 @Getter
 @Setter

@@ -1,7 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.abstracts;
 
-import com.tobeto.hotelReservationSystem.services.dtos.requests.District.GetAllByCityIdRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.District.GetAllByCityIdResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.district.GetAllByCityIdResponse;
 
 import java.util.List;
 

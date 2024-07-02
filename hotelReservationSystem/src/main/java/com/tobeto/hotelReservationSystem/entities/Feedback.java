@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "feedbacks")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

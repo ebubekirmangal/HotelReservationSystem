@@ -6,13 +6,14 @@ import com.tobeto.hotelReservationSystem.services.dtos.requests.auth.RegisterAut
 import com.tobeto.hotelReservationSystem.services.dtos.responses.auth.LoginAuthResponse;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.auth.RegisterAuthResponse;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/v1/auth")

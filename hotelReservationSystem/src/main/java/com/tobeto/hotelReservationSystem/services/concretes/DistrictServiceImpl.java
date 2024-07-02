@@ -3,7 +3,7 @@ package com.tobeto.hotelReservationSystem.services.concretes;
 import com.tobeto.hotelReservationSystem.entities.addresses.District;
 import com.tobeto.hotelReservationSystem.repositories.DistrictRepository;
 import com.tobeto.hotelReservationSystem.services.abstracts.DistrictService;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.District.GetAllByCityIdResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.district.GetAllByCityIdResponse;
 import com.tobeto.hotelReservationSystem.services.mappers.DistrictMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -6,19 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddRoomRequest {
 
-    private String roomNumber;
+    private String title;
+
+    private List<String> imageData;
+
+    private double price;
 
     private RoomType roomType;
 
-    private int capacity;
-
-    private double price;
+    private List<String> features;
 
     private int hotelId;
 }

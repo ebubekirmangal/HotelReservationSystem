@@ -18,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -34,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPasswordConfirm(passwordEncoder.encode(request.getPasswordConfirm()));
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
+        user.setAuthorities(Collections.singletonList(request.getRole()));
         if(!request.getPassword().equals(request.getPasswordConfirm())) {
             throw new BusinessException("Şifreler eşleşmedi.");
         }

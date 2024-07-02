@@ -1,8 +1,7 @@
 package com.tobeto.hotelReservationSystem.controllers;
 
 import com.tobeto.hotelReservationSystem.services.abstracts.DistrictService;
-import com.tobeto.hotelReservationSystem.services.dtos.requests.District.GetAllByCityIdRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.District.GetAllByCityIdResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.district.GetAllByCityIdResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

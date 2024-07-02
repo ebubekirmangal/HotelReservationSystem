@@ -21,16 +21,14 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String title;
+
     @Column(name = "room_number")
     private String roomNumber;
-
-    private int capacity;
 
     private double price;
 
     private Boolean available;
-
-    private List<String> images;
 
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
@@ -41,4 +39,10 @@ public class Room {
 
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "room" )
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "room")
+    private List<Feature> features;
 }
