@@ -5,10 +5,7 @@ import com.tobeto.hotelReservationSystem.entities.enums.RoomType;
 import com.tobeto.hotelReservationSystem.services.abstracts.RoomService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.room.AddRoomRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.room.UpdateRoomRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.AddRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.GetByIdRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.ListRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.UpdateRoomResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.room.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +54,10 @@ public class RoomsController {
             @RequestParam RoomType roomType) {
         return roomService.findAvailableRooms(startDate, endDate,roomType);
     }
+    @GetMapping("/manager/getAllRoomByHotelId/{hotelId}")
+    public List<GetAllRoomByHotelIdResponse> getAllRoomByHotelId(@PathVariable int hotelId) {
+        return roomService.getAllRoomByHotelId(hotelId);
+    }
+
 
 }

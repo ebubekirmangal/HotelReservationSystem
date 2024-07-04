@@ -21,27 +21,53 @@ public class Payment {
 
     private int id;
 
-    private String cardNo;// Ödeme sağlayıcısı tarafından verilen benzersiz kimlik (paymentId)
+    private String encryptedCardHolderName;
 
-    private String cvv;
+    private String encryptedExpireYear;
 
-    private double amount;
+    private String encrytedExpireMonth;
 
-    private String currency;
+    private String encryptedCardNo;   // Ödeme sağlayıcısı tarafından verilen benzersiz kimlik (paymentId)
 
-    private String description;
+    private String encryptedCvv;
 
-    private LocalDateTime date;
+    private double totalPrice;
 
-    private boolean status; // Ödeme durumu (başarılı, başarısız vb.)
+  //TODO: cardholder, expire'ı encryt et
 
-    @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+  @Enumerated(EnumType.STRING)
+  private PaymentType paymentType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @OneToOne(mappedBy = "payment")
-    private Reservation reservation;
+    private PaymentDetail paymentDetail;
+
+
+    @Transient
+    private String cardNo;
+
+    @Transient
+    private String cvv;
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
 }
+
+

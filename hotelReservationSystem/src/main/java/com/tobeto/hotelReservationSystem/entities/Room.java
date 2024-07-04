@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "rooms")
 @Entity
@@ -21,16 +22,20 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "room_number")
-    private String roomNumber;
+//    @Column(name = "room_number")
+//    private String roomNumber;
 
     private int capacity;
 
     private double price;
 
+    private String title;
+
     private Boolean available;
 
-    private List<String> images;
+    public boolean isAvailable() {
+        return available;
+    }
 
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
@@ -41,4 +46,19 @@ public class Room {
 
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations;
+
+    @ElementCollection
+    @OneToMany(mappedBy = "room")
+    private List<Image> images;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "room_features",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "feature_id")
+    )
+    private Set<Feature> features;
+
+
+
 }

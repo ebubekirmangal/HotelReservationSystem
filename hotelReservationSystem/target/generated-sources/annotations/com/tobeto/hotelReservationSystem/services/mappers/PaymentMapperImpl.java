@@ -12,7 +12,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-29T20:46:11+0300",
+    date = "2024-07-04T23:10:25+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
 )
 public class PaymentMapperImpl implements PaymentMapper {
@@ -26,11 +26,9 @@ public class PaymentMapperImpl implements PaymentMapper {
         Payment payment = new Payment();
 
         payment.setUser( addPaymentRequestToUser( request ) );
-        payment.setAmount( request.getAmount() );
-        payment.setCurrency( request.getCurrency() );
-        payment.setDescription( request.getDescription() );
-        payment.setDate( request.getDate() );
-        payment.setStatus( request.isStatus() );
+        payment.setCardNo( request.getCardNo() );
+        payment.setCvv( request.getCvv() );
+        payment.setTotalPrice( request.getTotalPrice() );
         payment.setPaymentType( request.getPaymentType() );
 
         return payment;
@@ -45,12 +43,9 @@ public class PaymentMapperImpl implements PaymentMapper {
         Payment payment = new Payment();
 
         payment.setUser( updatePaymentRequestToUser( request ) );
+        payment.setCardNo( request.getCardNo() );
+        payment.setCvv( request.getCvv() );
         payment.setId( request.getId() );
-        payment.setAmount( request.getAmount() );
-        payment.setCurrency( request.getCurrency() );
-        payment.setDescription( request.getDescription() );
-        payment.setDate( request.getDate() );
-        payment.setStatus( request.isStatus() );
         payment.setPaymentType( request.getPaymentType() );
 
         return payment;
@@ -66,12 +61,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         addPaymentResponse.setUserId( paymentUserId( payment ) );
         addPaymentResponse.setId( payment.getId() );
-        addPaymentResponse.setAmount( payment.getAmount() );
+        addPaymentResponse.setCardNo( payment.getCardNo() );
+        addPaymentResponse.setCvv( payment.getCvv() );
         addPaymentResponse.setPaymentType( payment.getPaymentType() );
-        addPaymentResponse.setCurrency( payment.getCurrency() );
-        addPaymentResponse.setDescription( payment.getDescription() );
-        addPaymentResponse.setDate( payment.getDate() );
-        addPaymentResponse.setStatus( payment.isStatus() );
 
         return addPaymentResponse;
     }
@@ -86,12 +78,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         updatePaymentResponse.setUserId( paymentUserId( payment ) );
         updatePaymentResponse.setId( payment.getId() );
-        updatePaymentResponse.setAmount( payment.getAmount() );
+        updatePaymentResponse.setCardNo( payment.getCardNo() );
+        updatePaymentResponse.setCvv( payment.getCvv() );
         updatePaymentResponse.setPaymentType( payment.getPaymentType() );
-        updatePaymentResponse.setCurrency( payment.getCurrency() );
-        updatePaymentResponse.setDescription( payment.getDescription() );
-        updatePaymentResponse.setDate( payment.getDate() );
-        updatePaymentResponse.setStatus( payment.isStatus() );
 
         return updatePaymentResponse;
     }
@@ -106,12 +95,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         getByIdPaymentResponse.setUserId( paymentUserId( payment ) );
         getByIdPaymentResponse.setId( payment.getId() );
-        getByIdPaymentResponse.setAmount( payment.getAmount() );
+        getByIdPaymentResponse.setCardNo( payment.getCardNo() );
+        getByIdPaymentResponse.setCvv( payment.getCvv() );
         getByIdPaymentResponse.setPaymentType( payment.getPaymentType() );
-        getByIdPaymentResponse.setCurrency( payment.getCurrency() );
-        getByIdPaymentResponse.setDescription( payment.getDescription() );
-        getByIdPaymentResponse.setDate( payment.getDate() );
-        getByIdPaymentResponse.setStatus( payment.isStatus() );
 
         return getByIdPaymentResponse;
     }
@@ -126,12 +112,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         listPaymentResponse.setUserId( paymentUserId( payments ) );
         listPaymentResponse.setId( payments.getId() );
-        listPaymentResponse.setAmount( payments.getAmount() );
+        listPaymentResponse.setCardNo( payments.getCardNo() );
+        listPaymentResponse.setCvv( payments.getCvv() );
         listPaymentResponse.setPaymentType( payments.getPaymentType() );
-        listPaymentResponse.setCurrency( payments.getCurrency() );
-        listPaymentResponse.setDescription( payments.getDescription() );
-        listPaymentResponse.setDate( payments.getDate() );
-        listPaymentResponse.setStatus( payments.isStatus() );
 
         return listPaymentResponse;
     }

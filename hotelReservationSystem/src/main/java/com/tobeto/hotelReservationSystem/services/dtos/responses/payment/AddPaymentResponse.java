@@ -18,8 +18,8 @@ public class AddPaymentResponse {
 
     private int userId;
 
-    private String paymentId;
-
+    private String cardNo;
+    private String cvv;
     private double amount;
 
     private PaymentType paymentType;

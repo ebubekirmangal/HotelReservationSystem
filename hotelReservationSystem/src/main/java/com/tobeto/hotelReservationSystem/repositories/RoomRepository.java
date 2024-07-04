@@ -17,5 +17,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     List<Room> findAvailableRooms(@Param("startDate") LocalDate startDate,
                                   @Param("endDate") LocalDate endDate,
                                   @Param("roomType")RoomType roomType);
+
+    List<Room> findByHotelId(int hotelId);
 }
 

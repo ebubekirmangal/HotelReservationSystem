@@ -1,6 +1,13 @@
 package com.tobeto.hotelReservationSystem.entities.enums;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
     GUEST,
-    MANAGER
+    MANAGER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

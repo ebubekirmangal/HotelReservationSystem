@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.entities;
 
+import com.tobeto.hotelReservationSystem.entities.enums.GenderType;
 import com.tobeto.hotelReservationSystem.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,13 +31,23 @@ public class User implements UserDetails {
 
     private String lastName;
 
-    private LocalDate birthDay;
+    private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private GenderType genderType;
 
     @Column(unique = true)
-    private String email;
+    private String tcIdentificationNo;
+
+    private int phone;
+
+    @Column(unique = true)
+    private String userEmail;
+
+    @JoinTable(name = "roles",joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private List<Role> authorities;
 
     private String password;
 
@@ -47,12 +59,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Feedback> feedbacks;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Email email; // Kullanıcının e-posta bilgisi
+
     @OneToMany(mappedBy = "user")
     private List<Reply> replies;
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
+
+    @OneToMany(mappedBy = "user")
+    private List<Hotel>hotels;
 
     @Override
     public String getPassword() {
@@ -61,7 +75,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return userEmail;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tobeto.hotelReservationSystem.services.mappers;
 
 import com.tobeto.hotelReservationSystem.entities.Address;
 import com.tobeto.hotelReservationSystem.entities.Hotel;
+import com.tobeto.hotelReservationSystem.entities.User;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.AddHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.UpdateHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.AddHotelResponse;
@@ -12,7 +13,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-29T20:46:11+0300",
+    date = "2024-07-04T23:10:24+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
 )
 public class HotelMapperImpl implements HotelMapper {
@@ -25,11 +26,14 @@ public class HotelMapperImpl implements HotelMapper {
 
         Hotel hotel = new Hotel();
 
+        hotel.setUser( addHotelRequestToUser( request ) );
         hotel.setAddress( addHotelRequestToAddress( request ) );
+        hotel.setImages( mapImageDataToImages( request.getImageIds() ) );
+        hotel.setFeatures( mapFeaturesToFeatureEntities( request.getFeatureIds() ) );
         hotel.setName( request.getName() );
-        hotel.setPhoneNumber( request.getPhoneNumber() );
         hotel.setEmail( request.getEmail() );
-        hotel.setHousingType( request.getHousingType() );
+        hotel.setStar( request.getStar() );
+        hotel.setAccommodationType( request.getAccommodationType() );
 
         return hotel;
     }
@@ -42,12 +46,16 @@ public class HotelMapperImpl implements HotelMapper {
 
         Hotel hotel = new Hotel();
 
+        hotel.setUser( updateHotelRequestToUser( request ) );
         hotel.setAddress( updateHotelRequestToAddress( request ) );
+        hotel.setImages( mapImageDataToImages( request.getImageIds() ) );
+        hotel.setFeatures( mapFeaturesToFeatureEntities( request.getFeatureIds() ) );
         hotel.setId( request.getId() );
         hotel.setName( request.getName() );
-        hotel.setPhoneNumber( request.getPhoneNumber() );
         hotel.setEmail( request.getEmail() );
-        hotel.setHousingType( request.getHousingType() );
+        hotel.setRating( request.getRating() );
+        hotel.setStar( request.getStar() );
+        hotel.setAccommodationType( request.getAccommodationType() );
 
         return hotel;
     }
@@ -62,10 +70,6 @@ public class HotelMapperImpl implements HotelMapper {
 
         addHotelResponse.setAddressId( hotelAddressId( hotel ) );
         addHotelResponse.setId( hotel.getId() );
-        addHotelResponse.setName( hotel.getName() );
-        addHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
-        addHotelResponse.setEmail( hotel.getEmail() );
-        addHotelResponse.setHousingType( hotel.getHousingType() );
 
         return addHotelResponse;
     }
@@ -80,10 +84,6 @@ public class HotelMapperImpl implements HotelMapper {
 
         updateHotelResponse.setAddressId( hotelAddressId( hotel ) );
         updateHotelResponse.setId( hotel.getId() );
-        updateHotelResponse.setName( hotel.getName() );
-        updateHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
-        updateHotelResponse.setEmail( hotel.getEmail() );
-        updateHotelResponse.setHousingType( hotel.getHousingType() );
 
         return updateHotelResponse;
     }
@@ -98,10 +98,6 @@ public class HotelMapperImpl implements HotelMapper {
 
         listHotelResponse.setAddressId( hotelAddressId( hotel ) );
         listHotelResponse.setId( hotel.getId() );
-        listHotelResponse.setName( hotel.getName() );
-        listHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
-        listHotelResponse.setEmail( hotel.getEmail() );
-        listHotelResponse.setHousingType( hotel.getHousingType() );
 
         return listHotelResponse;
     }
@@ -116,12 +112,20 @@ public class HotelMapperImpl implements HotelMapper {
 
         getByIdHotelResponse.setAddressId( hotelAddressId( hotel ) );
         getByIdHotelResponse.setId( hotel.getId() );
-        getByIdHotelResponse.setName( hotel.getName() );
-        getByIdHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
-        getByIdHotelResponse.setEmail( hotel.getEmail() );
-        getByIdHotelResponse.setHousingType( hotel.getHousingType() );
 
         return getByIdHotelResponse;
+    }
+
+    protected User addHotelRequestToUser(AddHotelRequest addHotelRequest) {
+        if ( addHotelRequest == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setId( addHotelRequest.getUserId() );
+
+        return user;
     }
 
     protected Address addHotelRequestToAddress(AddHotelRequest addHotelRequest) {
@@ -134,6 +138,18 @@ public class HotelMapperImpl implements HotelMapper {
         address.setId( addHotelRequest.getAddressId() );
 
         return address;
+    }
+
+    protected User updateHotelRequestToUser(UpdateHotelRequest updateHotelRequest) {
+        if ( updateHotelRequest == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setId( updateHotelRequest.getUserId() );
+
+        return user;
     }
 
     protected Address updateHotelRequestToAddress(UpdateHotelRequest updateHotelRequest) {

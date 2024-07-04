@@ -16,18 +16,21 @@ public class AddPaymentRequest {
 
     private int userId;
 
-    private String paymentId;
+    private String cardNo;
 
-    private double amount;
+    private String expireYear;
+
+    private String expireMonth;
+
+    private String cardHolderName;
+
+    private String cvv;
+
+    private double totalPrice;
 
     private PaymentType paymentType;
 
-    private String currency;
 
-    private String description;
 
-    private LocalDateTime date;
-
-    private boolean status;
 
 }

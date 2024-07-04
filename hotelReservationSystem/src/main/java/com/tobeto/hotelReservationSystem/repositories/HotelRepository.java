@@ -15,14 +15,14 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 //            "WHERE r.price < :price AND h.rating > :rating", nativeQuery = false)
 //    List<ListHotelRoomResponse> findHotelsWithPriceAndRating(@Param("price") Double price, @Param("rating") Integer rating);
 //
-//    @Query("SELECT new com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.HotelDetailsResponse(h.name, a.city, rs.checkInDate, rs.checkOutDate) " +
+//    @Query("SELECT new com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.HotelDetailsResponse(h.name, c.name, rs.checkInDate, rs.checkOutDate) " +
 //            "FROM Hotel h " +
 //            "JOIN h.address a " +
 //            "JOIN h.reservations rs " +
 //            "JOIN h.rooms r " +
-//            "WHERE a.city = :city AND rs.checkInDate = :checkInDate AND rs.checkOutDate = :checkOutDate AND r.available = true " +
+//            "WHERE c.name = :c.name AND rs.checkInDate = :checkInDate AND rs.checkOutDate = :checkOutDate AND r.available = true " +
 //            "ORDER BY h.id ASC")
-//    List<HotelDetailsResponse> findHotelsByCityAndDates(@Param("city") String city,
+//    List<HotelDetailsResponse> findHotelsByCityAndDates(@Param("name") String name,
 //                                                        @Param("checkInDate") LocalDate checkInDate,
 //                                                        @Param("checkOutDate") LocalDate checkOutDate);
 

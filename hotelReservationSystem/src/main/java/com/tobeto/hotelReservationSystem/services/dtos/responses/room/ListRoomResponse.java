@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,13 +18,17 @@ public class ListRoomResponse {
 
     private RoomType roomType;
 
-    private String roomNumber;
+//    private String roomNumber;
 
     private int capacity;
 
     private double price;
 
     private  boolean available;
+
+    private List<Integer> featureIds;
+
+    private List<Integer> imageIds;
 
     private String hotelName;
 }

@@ -1,7 +1,7 @@
 package com.tobeto.hotelReservationSystem.core.configurations;
 
 import com.tobeto.hotelReservationSystem.core.filters.JwtFilter;
-import com.tobeto.hotelReservationSystem.services.abstracts.UserService;
+import com.tobeto.hotelReservationSystem.entities.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,31 +12,33 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtFilter jwtFilter;
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     private static final String[] WHITE_LIST_URLS = {
             "/swagger-ui/**",
-            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/v3/api-docs",
             "/v3/api-docs/**",
-            "/swagger-resources/**",
-            "/webjars/**",
             "/api/v1/auth/**"
     };
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(userService);
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
@@ -57,6 +59,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(WHITE_LIST_URLS)
                 .permitAll()
+                .requestMatchers("/manager/**").hasAnyAuthority(Role.MANAGER.name())
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -65,7 +68,20 @@ public class SecurityConfiguration {
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
-
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
+    }
+
 }

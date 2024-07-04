@@ -13,4 +13,8 @@ public class GetByIdAddressResponse {
 
     private int id;
 
+    private int hotelId;
+
+    private int districtId;
+
 }

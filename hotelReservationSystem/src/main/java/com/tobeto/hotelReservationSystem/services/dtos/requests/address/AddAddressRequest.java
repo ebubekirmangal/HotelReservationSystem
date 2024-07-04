@@ -13,6 +13,10 @@ public class AddAddressRequest {
 
     private String description;
 
+    private int hotelId;
+
+    private int districtId;
+
 }
 
 //TODO:hotelId eklenebilir?

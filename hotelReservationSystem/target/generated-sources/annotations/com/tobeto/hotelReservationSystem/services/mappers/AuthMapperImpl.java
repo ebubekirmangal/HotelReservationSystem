@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-29T20:46:11+0300",
+    date = "2024-07-04T23:10:25+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
 )
 public class AuthMapperImpl implements AuthMapper {
@@ -21,8 +21,7 @@ public class AuthMapperImpl implements AuthMapper {
 
         user.setFirstName( request.getFirstName() );
         user.setLastName( request.getLastName() );
-        user.setRole( request.getRole() );
-        user.setEmail( request.getEmail() );
+        user.setUserEmail( request.getUserEmail() );
         user.setPassword( request.getPassword() );
         user.setPasswordConfirm( request.getPasswordConfirm() );
 

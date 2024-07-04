@@ -1,5 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.concretes;
 
+import com.tobeto.hotelReservationSystem.core.services.EncryptionService;
 import com.tobeto.hotelReservationSystem.core.utils.exceptions.types.BusinessException;
 import com.tobeto.hotelReservationSystem.entities.Payment;
 import com.tobeto.hotelReservationSystem.repositories.PaymentRepository;
@@ -20,29 +21,51 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
+
     private final PaymentRepository paymentRepository;
+    private final EncryptionService encryptionService;
+
 
     @Override
     public AddPaymentResponse add(AddPaymentRequest request) {
-        if (request == null){
-            throw new BusinessException("Payment cannot be null");
+        try {
+            if (request == null) {
+                throw new BusinessException("Payment cannot be null");
+            }
+
+            Payment payment = PaymentMapper.INSTANCE.addPaymentRequestToPayment(request);
+            payment.setEncryptedCardNo(encryptionService.encrypt(request.getCardNo()));
+            payment.setEncryptedCvv(encryptionService.encrypt(request.getCvv()));
+
+            Payment saved = paymentRepository.save(payment);
+
+            return PaymentMapper.INSTANCE.paymentToAddPaymentResponse(saved);
+        } catch (Exception ex) {
+            // Hata oluştuğunda yapılacak işlemler
+            ex.printStackTrace(); // Hata izleme amaçlı
+            throw new BusinessException("Error adding payment"); // veya uygun bir şekilde işlem yapabilirsiniz
         }
-
-        Payment payment = PaymentMapper.INSTANCE.addPaymentRequestToPayment(request);
-        Payment saved = paymentRepository.save(payment);
-
-        return PaymentMapper.INSTANCE.paymentToAddPaymentResponse(saved);
     }
 
     @Override
     public UpdatePaymentResponse update(UpdatePaymentRequest request) {
+        try {
+
+
         if(!paymentRepository.existsById(request.getId())){
             throw  new BusinessException("Payment is not found");
         }
         Payment payment = PaymentMapper.INSTANCE.updatePaymentRequestToPayment(request);
+        payment.setEncryptedCardNo(encryptionService.encrypt(request.getCardNo()));
+        payment.setEncryptedCvv(encryptionService.encrypt(request.getCvv()));
         Payment updated = paymentRepository.save(payment);
 
         return PaymentMapper.INSTANCE.paymentToUpdatePaymentResponse(updated);
+        }catch (Exception ex){
+            // Hata oluştuğunda yapılacak işlemler
+            ex.printStackTrace(); // Hata izleme amaçlı
+            throw new BusinessException("Error updating payment"); // veya uygun bir şekilde işlem yapabilirsiniz
+        }
     }
 
     @Override

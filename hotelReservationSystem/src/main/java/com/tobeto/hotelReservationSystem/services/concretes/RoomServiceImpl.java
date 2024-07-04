@@ -7,10 +7,7 @@ import com.tobeto.hotelReservationSystem.repositories.RoomRepository;
 import com.tobeto.hotelReservationSystem.services.abstracts.RoomService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.room.AddRoomRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.room.UpdateRoomRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.AddRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.GetByIdRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.ListRoomResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.room.UpdateRoomResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.room.*;
 import com.tobeto.hotelReservationSystem.services.mappers.RoomMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,12 +32,7 @@ public class RoomServiceImpl implements RoomService {
         AddRoomResponse response = RoomMapper.INSTANCE.roomToAddRoomResponse(saved);
         return response;
     }
-    @Override
-    public void updateAvaible(Room room,boolean avaible){
-        room.setAvailable(avaible);
-        System.out.println("Updating room ID: " + room.getId() + " to availability: " + room.getAvailable());
-        roomRepository.save(room);
-    }
+
 
     @Override
     public UpdateRoomResponse update(UpdateRoomRequest request) {
@@ -58,9 +51,18 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<ListRoomResponse> getAll() {
-
         List<Room> rooms = roomRepository.findAll();
-        return RoomMapper.INSTANCE.roomsToGetAllRoomResponses(rooms);
+
+
+        List<ListRoomResponse> result = new ArrayList<>();
+        for (Room room : rooms) {
+
+            ListRoomResponse dto = RoomMapper.INSTANCE.roomsToGetAllRoomResponses(room);
+           result.add(dto);
+
+        }
+
+        return result;
     }
 
     @Override
@@ -70,22 +72,26 @@ public class RoomServiceImpl implements RoomService {
         GetByIdRoomResponse response = RoomMapper.INSTANCE.roomToGetByIdRoomResponse(room);
         return response;
     }
+
     @Override
-    public List<ListRoomResponse >findAvailableRooms(LocalDate startDate, LocalDate endDate, RoomType roomType) {
+    public List<ListRoomResponse> findAvailableRooms(LocalDate startDate, LocalDate endDate, RoomType roomType) {
         // Belirtilen tarih aralığında ve belirli oda türünde müsait odaları bulmak için gereken sorguyu yapın
-        List<Room> availableRooms = roomRepository.findAvailableRooms(startDate, endDate,roomType);
+        List<Room> availableRooms = roomRepository.findAvailableRooms(startDate, endDate, roomType);
 
         // Bulunan odaları ListRoomResponse formatına dönüştürün
         List<ListRoomResponse> availableRoomResponses = new ArrayList<>();
         for (Room room : availableRooms) {
-            ListRoomResponse roomResponse = new ListRoomResponse();
-            roomResponse.setId(room.getId());
-            roomResponse.setRoomNumber(room.getRoomNumber());
-            roomResponse.setCapacity(room.getCapacity());
-            roomResponse.setPrice(room.getPrice());
-            roomResponse.setAvailable(room.getAvailable());
-            // Diğer gerekli bilgileri ekleyin
-            availableRoomResponses.add(roomResponse);
+//            ListRoomResponse roomResponse = new ListRoomResponse();
+//            roomResponse.setId(room.getId());
+//          //  roomResponse.setRoomNumber(room.getRoomNumber());
+//            roomResponse.setCapacity(room.getCapacity());
+//            roomResponse.setPrice(room.getPrice());
+//            roomResponse.setAvailable(room.getAvailable());
+//            // Diğer gerekli bilgileri ekleyin
+//            availableRoomResponses.add(roomResponse);
+            ListRoomResponse dto = RoomMapper.INSTANCE.roomsToGetAllRoomResponses(room);
+            availableRoomResponses.add(dto);
+
         }
 
         return availableRoomResponses;
@@ -95,4 +101,25 @@ public class RoomServiceImpl implements RoomService {
     public Room findRoomById(int id) {
         return roomRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void updateAvailable(Room room, boolean isAvailable) {
+        room.setAvailable(isAvailable);
+        System.out.println("Updating room ID: " + room.getId() + " to availability: " + room.getAvailable());
+        roomRepository.save(room);
+
+    }
+
+    @Override
+    public List<GetAllRoomByHotelIdResponse> getAllRoomByHotelId(int hotelId) {
+       List<Room> rooms = roomRepository.findByHotelId(hotelId);
+       List<GetAllRoomByHotelIdResponse> result = new ArrayList<>();
+       for (Room room:rooms){
+          GetAllRoomByHotelIdResponse dto = RoomMapper.INSTANCE.roomsToGetAllRoomByHotelIdResponse(room);
+          result.add(dto);
+       }
+        return result;
+    }
+
+
 }

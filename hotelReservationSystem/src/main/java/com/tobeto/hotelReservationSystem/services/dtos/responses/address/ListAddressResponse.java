@@ -13,6 +13,10 @@ public class ListAddressResponse {
 
     private int id;
 
+    private int hotelId;
+
+    private int districtId;
+
 
 
 }

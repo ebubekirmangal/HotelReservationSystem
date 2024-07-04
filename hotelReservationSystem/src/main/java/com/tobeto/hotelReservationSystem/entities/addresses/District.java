@@ -1,10 +1,13 @@
 package com.tobeto.hotelReservationSystem.entities.addresses;
 
+import com.tobeto.hotelReservationSystem.entities.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Table(name = "districts")
 @Entity
@@ -20,7 +23,10 @@ public class District {
 
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="city_id")
     private City city;
+
+    @OneToMany(mappedBy = "district")
+    private List<Address> addresses;
 }

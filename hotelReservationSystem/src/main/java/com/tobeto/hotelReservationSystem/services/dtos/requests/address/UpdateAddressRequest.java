@@ -11,7 +11,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateAddressRequest {
     private int id;
+
     private String description;
+
+    private int hotelId;
+
+    private int districtId;
+
+
 
 
 

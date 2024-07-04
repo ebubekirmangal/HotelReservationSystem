@@ -48,5 +48,5 @@ public class Reservation {
 
     @OneToOne
     @JoinColumn(name = "payment_id")
-    private Payment payment;
+    private PaymentDetail paymentDetail;
 }
