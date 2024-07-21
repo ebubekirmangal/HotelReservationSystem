@@ -23,12 +23,14 @@ public class Hotel {
 
     private String name;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @Column(name = "phone")
+    private String phone;
 
     private String email;
 
     private int rating;
+
+    private int star;
 
     @Enumerated(EnumType.STRING)
     private HousingType housingType;
@@ -48,4 +50,8 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel")
     private List<Feature> features;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -6,6 +6,7 @@ import com.tobeto.hotelReservationSystem.services.dtos.requests.auth.RegisterAut
 import com.tobeto.hotelReservationSystem.services.dtos.responses.auth.LoginAuthResponse;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.auth.RegisterAuthResponse;
 
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +25,13 @@ public class AuthsController {
     public RegisterAuthResponse register(@RequestBody  @Valid RegisterAuthRequest request){
         return authService.register(request);
     }
+
     @PostMapping("/login")
     public LoginAuthResponse login(@RequestBody @Valid LoginAuthRequest request){
         return authService.login(request);
     }
-
+    @PostMapping("/manager-login")
+    public LoginAuthResponse managerLogin(@RequestBody @Valid LoginAuthRequest request){
+        return authService.login(request);
+    }
 }

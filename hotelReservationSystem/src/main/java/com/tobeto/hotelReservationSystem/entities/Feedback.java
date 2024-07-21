@@ -20,6 +20,8 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String title;
+
     private String content;
 
     private int rating;
@@ -27,6 +29,7 @@ public class Feedback {
     private LocalDateTime date;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne

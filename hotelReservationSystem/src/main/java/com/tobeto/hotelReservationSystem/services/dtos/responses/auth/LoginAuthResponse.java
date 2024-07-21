@@ -14,5 +14,7 @@ public class LoginAuthResponse {
 
     private String token;
 
-    private User user;
+    private int userId;
+
+    private String role;
 }

@@ -2,7 +2,7 @@ package com.tobeto.hotelReservationSystem.core.configurations;
 
 import com.tobeto.hotelReservationSystem.core.filters.JwtFilter;
 import com.tobeto.hotelReservationSystem.entities.enums.Role;
-import com.tobeto.hotelReservationSystem.services.abstracts.UserService;
+import com.tobeto.hotelReservationSystem.services.abstracts.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtFilter jwtFilter;
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     private static final String[] WHITE_LIST_URLS = {
             "/swagger-ui/**",
@@ -38,7 +39,7 @@ public class SecurityConfiguration {
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(userService);
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

@@ -1,8 +1,6 @@
 package com.tobeto.hotelReservationSystem.services.mappers;
 
-import com.tobeto.hotelReservationSystem.entities.Hotel;
-import com.tobeto.hotelReservationSystem.entities.Reservation;
-import com.tobeto.hotelReservationSystem.entities.User;
+import com.tobeto.hotelReservationSystem.entities.*;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.AddHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.UpdateHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.AddHotelResponse;
@@ -14,6 +12,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,9 @@ public interface HotelMapper {
     HotelMapper INSTANCE = Mappers.getMapper(HotelMapper.class);
 
     //@Mapping(target = "reservations",source = "userId")
-    @Mapping(target = "address.id", source = "addressId")
+    @Mapping(target = "images", source = "imageData")
+    @Mapping(target = "features", source = "features")
+    @Mapping(target = "user.id",source = "userId")
     Hotel  hotelToAddHotelRequest(AddHotelRequest request);
     //@Mapping(target = "reservations",source = "userId")
     @Mapping(target = "address.id", source = "addressId")
@@ -48,4 +49,24 @@ public interface HotelMapper {
     }
 
  */
+default List<Image> mapImageDataToImages(List<String> imageData) {
+    if (imageData == null) {
+        return null;
+    }
+    return imageData.stream().map(data -> {
+        Image image = new Image();
+        image.setData(Base64.getDecoder().decode(data));
+        return image;
+    }).collect(Collectors.toList());
+}
+    default List<Feature> mapFeaturesToFeatureEntities(List<String> features) {
+        if (features == null) {
+            return null;
+        }
+        return features.stream().map(name -> {
+            Feature feature = new Feature();
+            feature.setName(name);
+            return feature;
+        }).collect(Collectors.toList());
+    }
 }

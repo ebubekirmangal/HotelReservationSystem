@@ -2,6 +2,7 @@ package com.tobeto.hotelReservationSystem.services.mappers;
 
 import com.tobeto.hotelReservationSystem.entities.Address;
 import com.tobeto.hotelReservationSystem.entities.Hotel;
+import com.tobeto.hotelReservationSystem.entities.User;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.AddHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.hotel.UpdateHotelRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.hotel.AddHotelResponse;
@@ -12,7 +13,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-01T19:51:26+0300",
+    date = "2024-07-04T17:40:08+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class HotelMapperImpl implements HotelMapper {
@@ -25,10 +26,13 @@ public class HotelMapperImpl implements HotelMapper {
 
         Hotel hotel = new Hotel();
 
-        hotel.setAddress( addHotelRequestToAddress( request ) );
+        hotel.setUser( addHotelRequestToUser( request ) );
+        hotel.setImages( mapImageDataToImages( request.getImageData() ) );
+        hotel.setFeatures( mapFeaturesToFeatureEntities( request.getFeatures() ) );
         hotel.setName( request.getName() );
-        hotel.setPhoneNumber( request.getPhoneNumber() );
+        hotel.setPhone( request.getPhone() );
         hotel.setEmail( request.getEmail() );
+        hotel.setStar( request.getStar() );
         hotel.setHousingType( request.getHousingType() );
 
         return hotel;
@@ -45,7 +49,6 @@ public class HotelMapperImpl implements HotelMapper {
         hotel.setAddress( updateHotelRequestToAddress( request ) );
         hotel.setId( request.getId() );
         hotel.setName( request.getName() );
-        hotel.setPhoneNumber( request.getPhoneNumber() );
         hotel.setEmail( request.getEmail() );
         hotel.setHousingType( request.getHousingType() );
 
@@ -63,7 +66,6 @@ public class HotelMapperImpl implements HotelMapper {
         addHotelResponse.setAddressId( hotelAddressId( hotel ) );
         addHotelResponse.setId( hotel.getId() );
         addHotelResponse.setName( hotel.getName() );
-        addHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         addHotelResponse.setEmail( hotel.getEmail() );
         addHotelResponse.setHousingType( hotel.getHousingType() );
 
@@ -81,7 +83,6 @@ public class HotelMapperImpl implements HotelMapper {
         updateHotelResponse.setAddressId( hotelAddressId( hotel ) );
         updateHotelResponse.setId( hotel.getId() );
         updateHotelResponse.setName( hotel.getName() );
-        updateHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         updateHotelResponse.setEmail( hotel.getEmail() );
         updateHotelResponse.setHousingType( hotel.getHousingType() );
 
@@ -99,7 +100,6 @@ public class HotelMapperImpl implements HotelMapper {
         listHotelResponse.setAddressId( hotelAddressId( hotel ) );
         listHotelResponse.setId( hotel.getId() );
         listHotelResponse.setName( hotel.getName() );
-        listHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         listHotelResponse.setEmail( hotel.getEmail() );
         listHotelResponse.setHousingType( hotel.getHousingType() );
 
@@ -117,23 +117,22 @@ public class HotelMapperImpl implements HotelMapper {
         getByIdHotelResponse.setAddressId( hotelAddressId( hotel ) );
         getByIdHotelResponse.setId( hotel.getId() );
         getByIdHotelResponse.setName( hotel.getName() );
-        getByIdHotelResponse.setPhoneNumber( hotel.getPhoneNumber() );
         getByIdHotelResponse.setEmail( hotel.getEmail() );
         getByIdHotelResponse.setHousingType( hotel.getHousingType() );
 
         return getByIdHotelResponse;
     }
 
-    protected Address addHotelRequestToAddress(AddHotelRequest addHotelRequest) {
+    protected User addHotelRequestToUser(AddHotelRequest addHotelRequest) {
         if ( addHotelRequest == null ) {
             return null;
         }
 
-        Address address = new Address();
+        User user = new User();
 
-        address.setId( addHotelRequest.getAddressId() );
+        user.setId( addHotelRequest.getUserId() );
 
-        return address;
+        return user;
     }
 
     protected Address updateHotelRequestToAddress(UpdateHotelRequest updateHotelRequest) {

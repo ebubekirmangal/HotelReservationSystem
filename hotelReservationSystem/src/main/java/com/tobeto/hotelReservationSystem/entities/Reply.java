@@ -27,4 +27,6 @@ public class Reply {
     private String content;
 
     private LocalDateTime date;
+
+    private boolean transactionDone;
 }

@@ -1,21 +1,19 @@
 package com.tobeto.hotelReservationSystem.core.configurations;
 
-import com.tobeto.hotelReservationSystem.core.utils.exceptions.types.BusinessException;
-import com.tobeto.hotelReservationSystem.repositories.UserRepository;
+import com.tobeto.hotelReservationSystem.repositories.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-    private final UserRepository userRepository;
+    private final AuthRepository authRepository;
     @Bean
     public UserDetailsService userDetailsService(){
-        return  username -> userRepository.findByEmail(username)
+        return  username -> authRepository.findByEmail(username)
                 .orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 }

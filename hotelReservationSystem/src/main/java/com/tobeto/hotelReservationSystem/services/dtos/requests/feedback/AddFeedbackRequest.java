@@ -17,6 +17,8 @@ public class AddFeedbackRequest {
 
     private int reservationId;
 
+    private String title;
+
     private String content;
 
     private int rating;

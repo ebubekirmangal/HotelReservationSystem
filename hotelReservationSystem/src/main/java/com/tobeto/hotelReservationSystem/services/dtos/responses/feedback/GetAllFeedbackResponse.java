@@ -24,4 +24,6 @@ public class GetAllFeedbackResponse {
     private int rating;
 
     private LocalDateTime date;
+
+    private boolean transactionDone;
 }

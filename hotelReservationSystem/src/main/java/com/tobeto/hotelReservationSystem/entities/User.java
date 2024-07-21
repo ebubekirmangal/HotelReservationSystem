@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +30,8 @@ public class User implements UserDetails {
 
     private String lastName;
 
-    private LocalDate birthDay;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateOfBirth;
 
     @JoinTable(name="roles", joinColumns = @JoinColumn(name="user_id"))
     @Column(name="role")
@@ -51,6 +53,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Reply> replies;
+
+    @OneToMany(mappedBy = "user")
+    private List<Hotel> hotels;
 
     @Override
     public String getPassword() {

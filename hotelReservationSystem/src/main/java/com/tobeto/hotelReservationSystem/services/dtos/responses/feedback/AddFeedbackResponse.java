@@ -24,4 +24,6 @@ public class AddFeedbackResponse {
     private int rating;
 
     private LocalDateTime date;
+
+    private boolean isTransactionDone;
 }

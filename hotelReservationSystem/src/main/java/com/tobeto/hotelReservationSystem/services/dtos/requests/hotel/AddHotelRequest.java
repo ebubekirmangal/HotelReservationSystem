@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,14 +18,16 @@ public class AddHotelRequest {
 
     private String name;
 
-    private String address;
+    private int star;
 
-    private String phoneNumber;
+    private List<String> imageData;
+
+    private String phone;
 
     private String email;
 
-    private int addressId;
-
     private HousingType housingType;
+
+    private List<String> features;
 
 }
