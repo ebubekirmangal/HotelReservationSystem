@@ -6,28 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+@Table(name = "room_features")
+@Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Reply {
+@NoArgsConstructor
+public class RoomFeatures {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    private Feedback feedback;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "feature_id")
+    private Feature feature;
 
-    private String title;
-
-    private String content;
-
-    private LocalDateTime date;
-
-    private boolean transactionDone;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 }

@@ -3,10 +3,7 @@ package com.tobeto.hotelReservationSystem.controllers;
 import com.tobeto.hotelReservationSystem.services.abstracts.ReplyService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reply.AddReplyRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reply.UpdateReplyRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.AddReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.GetAllReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.GetByIdReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.UpdateReplyResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +36,9 @@ public class RepliesController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable("id") int id) {
         replyService.delete(id);
+    }
+    @GetMapping("/getByFeedback/{feedbackId}")
+    public GetByFeedbackIdForReply getReplyByFeedbackId(@PathVariable int feedbackId) {
+        return replyService.getReplyByFeedbackId(feedbackId);
     }
 }

@@ -1,15 +1,14 @@
 package com.tobeto.hotelReservationSystem.services.concretes;
 
 import com.tobeto.hotelReservationSystem.core.utils.exceptions.types.BusinessException;
+import com.tobeto.hotelReservationSystem.entities.Feedback;
 import com.tobeto.hotelReservationSystem.entities.Reply;
 import com.tobeto.hotelReservationSystem.repositories.ReplyRepository;
+import com.tobeto.hotelReservationSystem.services.abstracts.FeedbackService;
 import com.tobeto.hotelReservationSystem.services.abstracts.ReplyService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reply.AddReplyRequest;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.reply.UpdateReplyRequest;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.AddReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.GetAllReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.GetByIdReplyResponse;
-import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.UpdateReplyResponse;
+import com.tobeto.hotelReservationSystem.services.dtos.responses.reply.*;
 import com.tobeto.hotelReservationSystem.services.mappers.ReplyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,33 +16,52 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
 
     private final ReplyRepository replyRepository;
+
+    private final FeedbackService feedbackService;
     @Override
     public AddReplyResponse add(AddReplyRequest request) {
-        if(request == null){
-            throw new BusinessException("Reply cannot be null");
-        }
-        Reply reply = ReplyMapper.INSTANCE.replyToAddReplyRequest(request);
-        reply.setDate(LocalDateTime.now());
-        Reply saved = replyRepository.save(reply);
-
-        return ReplyMapper.INSTANCE.addReplyResponseToReply(saved);
+        Reply newReply = ReplyMapper.INSTANCE.replyToAddReplyRequest(request);
+        newReply.setTransactionDone(true);
+        newReply.setDate(LocalDateTime.now());
+        return ReplyMapper.INSTANCE.addReplyResponseToReply(replyRepository.save(newReply));
     }
 
     @Override
     public UpdateReplyResponse update(UpdateReplyRequest request) {
-        if (!replyRepository.existsById(request.getId())){
-            throw new BusinessException("Reply is not found");
-        }
-        Reply reply = ReplyMapper.INSTANCE.replyToUpdateReplyRequest(request);
-        Reply updated = replyRepository.save(reply);
+        // Var olan feedback'i feedbackService üzerinden bul
+        Feedback feedback = feedbackService.getFeedbackById(request.getFeedbackId());
+        Optional<Reply> optionalReply = replyRepository.findByFeedbackId(request.getFeedbackId());
 
-        return ReplyMapper.INSTANCE.updateReplyResponseToReply(updated);
+        // Reply var mı kontrol et
+        if (optionalReply.isEmpty()) {
+            throw new RuntimeException("Reply not found for feedback id: " + request.getFeedbackId());
+        }
+
+        Reply reply = optionalReply.get();
+
+        // Reply güncelle
+        reply.setTitle(request.getTitle());
+        reply.setContent(request.getContent());
+        reply.setTransactionDone(true); // Doğru yazım: setTransactionalDone
+        reply.setDate(LocalDateTime.now());
+
+        // Reply'i kaydet
+        replyRepository.save(reply);
+
+        // Feedback güncelle (eğer gerekiyorsa)
+        // feedback.set... (gereken güncellemeleri yapın)
+
+        // Entity'leri kaydetmeye gerek yok, çünkü reply zaten managed bir entity
+
+        // Response dön
+        return ReplyMapper.INSTANCE.updateReplyResponseToReply(reply);
     }
 
     @Override
@@ -73,5 +91,16 @@ public class ReplyServiceImpl implements ReplyService {
             throw new BusinessException("Feedback not found");
         }
         replyRepository.deleteById(id);
+    }
+    public GetByFeedbackIdForReply getReplyByFeedbackId(int feedbackId) {
+        Optional<Reply> reply = replyRepository.findByFeedbackId(feedbackId);
+        if (!reply.isPresent()){
+            throw new RuntimeException("reply not found");
+        }
+        GetByFeedbackIdForReply result = new GetByFeedbackIdForReply();
+        result.setTitle(reply.get().getTitle());
+        result.setContent(reply.get().getContent());
+        result.setTransactionalDone(reply.get().isTransactionDone());
+        return result;
     }
 }

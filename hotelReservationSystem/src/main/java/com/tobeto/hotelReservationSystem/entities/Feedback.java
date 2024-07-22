@@ -19,6 +19,8 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String title;
+
     private String content;
 
     private int rating;
@@ -31,6 +33,6 @@ public class Feedback {
     @ManyToOne
     private Reservation reservation;
 
-    @OneToMany(mappedBy = "feedback")
-    private List<Reply> replies;
+    @OneToOne(mappedBy = "feedback")
+    private Reply reply;
 }

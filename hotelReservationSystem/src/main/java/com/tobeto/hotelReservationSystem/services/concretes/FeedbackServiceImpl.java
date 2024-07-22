@@ -2,6 +2,7 @@ package com.tobeto.hotelReservationSystem.services.concretes;
 
 import com.tobeto.hotelReservationSystem.core.utils.exceptions.types.BusinessException;
 import com.tobeto.hotelReservationSystem.entities.Feedback;
+import com.tobeto.hotelReservationSystem.entities.Reply;
 import com.tobeto.hotelReservationSystem.repositories.FeedbackRepository;
 import com.tobeto.hotelReservationSystem.services.abstracts.FeedbackService;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.feedback.AddFeedbackRequest;
@@ -11,12 +12,14 @@ import com.tobeto.hotelReservationSystem.services.dtos.responses.feedback.GetAll
 import com.tobeto.hotelReservationSystem.services.dtos.responses.feedback.GetByIdFeedbackResponse;
 import com.tobeto.hotelReservationSystem.services.dtos.responses.feedback.UpdateFeedbackResponse;
 import com.tobeto.hotelReservationSystem.services.mappers.FeedbackMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,14 +28,14 @@ public class FeedbackServiceImpl implements FeedbackService {
     private FeedbackRepository feedbackRepository;
     @Override
     public AddFeedbackResponse add(AddFeedbackRequest request) {
-        if (request == null){
-            throw new BusinessException("Feedback cannot be null");
-        }
-        Feedback feedback = FeedbackMapper.INSTANCE.feedbackToAddFeedbackRequest(request);
-        feedback.setDate(LocalDateTime.now());
-        Feedback saved = feedbackRepository.save(feedback);
+        Feedback newFeedback = FeedbackMapper.INSTANCE.feedbackToAddFeedbackRequest(request);
+        newFeedback.setDate(LocalDateTime.now());
 
-        return FeedbackMapper.INSTANCE.addFeedbackResponseToFeedback(saved);
+        Reply reply = new Reply();
+        reply.setTransactionDone(false);
+        reply.setFeedback(newFeedback);
+        newFeedback.setReply(reply);
+        return FeedbackMapper.INSTANCE.addFeedbackResponseToFeedback(feedbackRepository.save(newFeedback));
     }
 
     @Override
@@ -46,14 +49,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<GetAllFeedbackResponse> getAll() {
-        List<Feedback> feedbacks = feedbackRepository.findAll();
-        List<GetAllFeedbackResponse> result = new ArrayList<>();
-
-        for (Feedback feedback:feedbacks){
-            GetAllFeedbackResponse dto = FeedbackMapper.INSTANCE.getAllFeedbackResponsesToFeedback(feedback);
-            result.add(dto);
-        }
-        return result;
+        List<Feedback> filteredFeedback = feedbackRepository.findAllByOrderByDateDesc();
+        return filteredFeedback.stream()
+                .map(FeedbackMapper.INSTANCE::getAllFeedbackResponsesToFeedback)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,5 +69,9 @@ public class FeedbackServiceImpl implements FeedbackService {
            throw new BusinessException("Feedback not found");
         }
         feedbackRepository.deleteById(id);
+    }
+    public Feedback getFeedbackById(int id) {
+        return feedbackRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Feedback not found with id: " + id));
     }
 }

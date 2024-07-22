@@ -13,8 +13,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-04T23:10:25+0300",
-    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
+    date = "2024-07-21T21:41:16+0300",
+    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class ReplyMapperImpl implements ReplyMapper {
 
@@ -28,6 +28,7 @@ public class ReplyMapperImpl implements ReplyMapper {
 
         reply.setUser( addReplyRequestToUser( request ) );
         reply.setFeedback( addReplyRequestToFeedback( request ) );
+        reply.setTitle( request.getTitle() );
         reply.setContent( request.getContent() );
         reply.setDate( request.getDate() );
 
@@ -45,6 +46,7 @@ public class ReplyMapperImpl implements ReplyMapper {
         reply.setUser( updateReplyRequestToUser( request ) );
         reply.setFeedback( updateReplyRequestToFeedback( request ) );
         reply.setId( request.getId() );
+        reply.setTitle( request.getTitle() );
         reply.setContent( request.getContent() );
         reply.setDate( request.getDate() );
 
@@ -62,7 +64,6 @@ public class ReplyMapperImpl implements ReplyMapper {
         addReplyResponse.setUserId( requestUserId( request ) );
         addReplyResponse.setFeedbackId( requestFeedbackId( request ) );
         addReplyResponse.setId( request.getId() );
-        addReplyResponse.setContent( request.getContent() );
         addReplyResponse.setDate( request.getDate() );
 
         return addReplyResponse;

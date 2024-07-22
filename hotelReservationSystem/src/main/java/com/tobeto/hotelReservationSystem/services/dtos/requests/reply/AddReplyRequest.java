@@ -17,6 +17,8 @@ public class AddReplyRequest {
 
     private int feedbackId;
 
+    private String title;
+
     private String content;
     @Setter
     private LocalDateTime date;

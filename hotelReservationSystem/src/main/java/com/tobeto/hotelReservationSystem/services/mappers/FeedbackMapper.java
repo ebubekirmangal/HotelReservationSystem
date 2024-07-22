@@ -37,5 +37,6 @@ public interface FeedbackMapper {
     GetByIdFeedbackResponse getByIdFeedbackResponseFeedback(Feedback feedback);
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "reservationId", source = "reservation.id")
+    @Mapping(target = "transactionDone",source = "reply.transactionDone")
     GetAllFeedbackResponse getAllFeedbackResponsesToFeedback(Feedback feedbacks);
 }

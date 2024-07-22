@@ -1,6 +1,7 @@
 package com.tobeto.hotelReservationSystem.services.mappers;
 
 import com.tobeto.hotelReservationSystem.entities.Feedback;
+import com.tobeto.hotelReservationSystem.entities.Reply;
 import com.tobeto.hotelReservationSystem.entities.Reservation;
 import com.tobeto.hotelReservationSystem.entities.User;
 import com.tobeto.hotelReservationSystem.services.dtos.requests.feedback.AddFeedbackRequest;
@@ -13,8 +14,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-04T23:10:25+0300",
-    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.3 (Oracle Corporation)"
+    date = "2024-07-21T21:41:16+0300",
+    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 public class FeedbackMapperImpl implements FeedbackMapper {
 
@@ -28,6 +29,7 @@ public class FeedbackMapperImpl implements FeedbackMapper {
 
         feedback1.setUser( addFeedbackRequestToUser( feedback ) );
         feedback1.setReservation( addFeedbackRequestToReservation( feedback ) );
+        feedback1.setTitle( feedback.getTitle() );
         feedback1.setContent( feedback.getContent() );
         feedback1.setRating( feedback.getRating() );
         feedback1.setDate( feedback.getDate() );
@@ -117,6 +119,7 @@ public class FeedbackMapperImpl implements FeedbackMapper {
 
         getAllFeedbackResponse.setUserId( feedbackUserId( feedbacks ) );
         getAllFeedbackResponse.setReservationId( feedbackReservationId( feedbacks ) );
+        getAllFeedbackResponse.setTransactionDone( feedbacksReplyTransactionDone( feedbacks ) );
         getAllFeedbackResponse.setId( feedbacks.getId() );
         getAllFeedbackResponse.setContent( feedbacks.getContent() );
         getAllFeedbackResponse.setRating( feedbacks.getRating() );
@@ -187,5 +190,13 @@ public class FeedbackMapperImpl implements FeedbackMapper {
             return 0;
         }
         return reservation.getId();
+    }
+
+    private boolean feedbacksReplyTransactionDone(Feedback feedback) {
+        Reply reply = feedback.getReply();
+        if ( reply == null ) {
+            return false;
+        }
+        return reply.isTransactionDone();
     }
 }

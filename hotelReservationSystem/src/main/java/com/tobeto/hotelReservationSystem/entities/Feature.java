@@ -7,7 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "tables")
+import java.util.HashSet;
+import java.util.Set;
+
+@Table(name = "features")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,11 +27,9 @@ public class Feature {
     @Enumerated(EnumType.STRING)
     private FeatureType featureType;
 
-    @ManyToOne
-    @JoinColumn(name = "hotel_id")
-    private Hotel hotel;
+    @ManyToMany(mappedBy = "features")
+    private Set<Hotel> hotels = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @ManyToMany(mappedBy = "features")
+    private Set<Room> rooms = new HashSet<>();
 }
